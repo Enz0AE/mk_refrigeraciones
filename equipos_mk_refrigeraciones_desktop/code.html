@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Equipos - MK Refrigeraciones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#a5eeff",
+                        "secondary": "#006877",
+                        "surface-tint": "#49607e",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-secondary-fixed-variant": "#004e5a",
+                        "on-surface-variant": "#43474d",
+                        "on-secondary-fixed": "#001f25",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-fixed-dim": "#00daf8",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "primary-fixed": "#d2e4ff",
+                        "on-primary-fixed-variant": "#314865",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "secondary-container": "#00e0ff",
+                        "primary": "#000f22",
+                        "outline": "#74777e",
+                        "tertiary-container": "#212527",
+                        "on-secondary-container": "#005f6d",
+                        "industrial-gray": "#475569",
+                        "surface-bright": "#faf9fb",
+                        "on-primary-container": "#768dad",
+                        "inverse-surface": "#2f3033",
+                        "surface-dim": "#dbd9dc",
+                        "surface-container": "#efedf0",
+                        "surface-container-low": "#f5f3f6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "frost-blue": "#E2E8F0",
+                        "inverse-primary": "#b0c8eb",
+                        "outline-variant": "#c4c6ce",
+                        "safety-orange": "#FF4D00",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e9e8ea",
+                        "background": "#faf9fb",
+                        "primary-container": "#0a2540",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2f0f3",
+                        "primary-fixed-dim": "#b0c8eb",
+                        "on-background": "#1b1c1e",
+                        "on-surface": "#1b1c1e",
+                        "surface-variant": "#e3e2e5",
+                        "on-primary-fixed": "#001c37",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface": "#faf9fb",
+                        "tertiary": "#0c1011",
+                        "on-tertiary-container": "#898c8e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter-sm": "16px",
+                        "gutter-md": "24px",
+                        "margin-edge": "32px",
+                        "unit": "4px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "technical-data": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "technical-data": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md text-body-md selection:bg-safety-orange selection:text-white">
+<!-- TopNavBar -->
+<nav class="bg-primary dark:bg-primary sticky top-0 w-full z-50 h-20 border-b border-outline-variant dark:border-industrial-gray">
+<div class="flex items-center justify-between max-w-[1280px] mx-auto px-margin-edge w-full h-full">
+<!-- Logo -->
+<a class="font-headline-lg text-headline-lg font-bold tracking-tighter text-on-primary" href="#">
+                MK REFRIGERACIONES
+            </a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex space-x-gutter-md">
+<a class="font-label-sm text-label-sm text-on-primary opacity-80 hover:opacity-100 transition-opacity uppercase" href="#">Instalaciones</a>
+<a class="font-label-sm text-label-sm text-on-primary opacity-80 hover:opacity-100 transition-opacity uppercase" href="#">Contenedores</a>
+<a class="font-label-sm text-label-sm text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim pb-1 uppercase" href="#">Equipos</a>
+</div>
+<!-- CTA (Desktop) -->
+<a class="hidden md:inline-flex items-center justify-center px-6 py-3 bg-safety-orange text-white font-technical-data text-technical-data font-bold rounded-none hover:bg-opacity-90 active:scale-95 duration-100 transition-all uppercase" href="#contacto">
+                SOLICITAR PRESUPUESTO
+            </a>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-primary p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="w-full py-section-gap px-margin-edge bg-surface-container-low border-b border-outline-variant relative overflow-hidden">
+<!-- Decorative Grid Background -->
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(to right, #475569 1px, transparent 1px), linear-gradient(to bottom, #475569 1px, transparent 1px); background-size: 32px 32px;"></div>
+<div class="max-w-[1280px] mx-auto relative z-10 text-center">
+<span class="inline-block px-4 py-1 bg-surface-tint/10 text-primary-container font-label-sm text-label-sm uppercase tracking-widest mb-6 rounded-none border border-outline-variant">Catálogo Industrial 2024</span>
+<h1 class="font-display-lg text-display-lg md:text-[64px] md:leading-[72px] text-primary-container mb-6 max-w-4xl mx-auto">Soluciones Frigoríficas de Alta Capacidad</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto mb-10 text-lg">Equipamiento modular, contenedores reefer y sistemas de exhibición comercial diseñados para mantener la cadena de frío con precisión técnica absoluta.</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto px-8 py-4 bg-primary-container text-white font-technical-data text-technical-data font-bold rounded-none hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#contenedores">
+<span>Ver Contenedores</span>
+<span class="material-symbols-outlined">arrow_downward</span>
+</a>
+<a class="w-full sm:w-auto px-8 py-4 bg-transparent border border-primary-container text-primary-container font-technical-data text-technical-data font-bold rounded-none hover:bg-surface-variant transition-colors flex items-center justify-center gap-2" href="#comercial">
+<span>Línea Comercial</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Contenedores Reefer Section (Bento Grid) -->
+<section class="w-full py-section-gap px-margin-edge" id="contenedores">
+<div class="max-w-[1280px] mx-auto">
+<div class="flex items-end justify-between mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-2">Contenedores Reefer</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Soluciones modulares portátiles (10, 20 y 40 ft).</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-md">
+<!-- Main Feature -->
+<div class="md:col-span-8 bg-white border border-outline-variant p-6 flex flex-col justify-between">
+<div class="mb-6">
+<span class="inline-block px-3 py-1 bg-[#e0f2fe] text-[#0369a1] font-technical-data text-[12px] font-bold rounded-none mb-4">ALTA DEMANDA</span>
+<h3 class="font-headline-lg text-[28px] leading-8 text-primary-container mb-2">Contenedor 40 FT High Cube</h3>
+<p class="text-on-surface-variant max-w-md">Máxima capacidad para almacenamiento masivo. Ideal para frigoríficos y centros logísticos.</p>
+</div>
+<div class="relative w-full aspect-video bg-surface-container-low mb-6 overflow-hidden border border-outline-variant">
+<img alt="Contenedor Reefer 40ft" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApduDDfwVyhhZGREXXuvNkzGaJ2qws8jQMuhLYOha-MIYqZqyCqF7J-Mur_2GCs-llqF1jO35UhrWuXCAI48Ips1IWhn_xrzK7y13rMf2NNv9k6W9E94Hxn4J01Ga8kDkr9BxtPToqszxUk1T3wTTuUgmBN1WlS023B-BMPoe4nI5eZcJHROo5QzBYitWnifFTY9o7Rlp4kKs8F7E1ChLYYgh-KpQs4Mxb9z_LLb_lq57cu8ctYGbgbtD-a6BJBILIiAsbNd7ICis"/>
+</div>
+<div class="grid grid-cols-3 gap-4 font-technical-data text-technical-data border-t border-outline-variant pt-4">
+<div>
+<span class="block text-outline text-[11px] uppercase mb-1">Volumen</span>
+<span class="font-bold text-primary-container">67.5 m³</span>
+</div>
+<div>
+<span class="block text-outline text-[11px] uppercase mb-1">Rango Temp</span>
+<span class="font-bold text-primary-container">-25°C a +25°C</span>
+</div>
+<div>
+<span class="block text-outline text-[11px] uppercase mb-1">Consumo</span>
+<span class="font-bold text-primary-container">12 kW/h max</span>
+</div>
+</div>
+</div>
+<!-- Specs Side -->
+<div class="md:col-span-4 flex flex-col gap-gutter-md">
+<!-- 20ft Card -->
+<div class="bg-white border border-outline-variant p-6 flex-1 flex flex-col">
+<h4 class="font-headline-lg text-[20px] leading-6 text-primary-container mb-2">Modelo 20 FT</h4>
+<p class="text-on-surface-variant text-sm mb-4 flex-1">Solución versátil para espacios intermedios y locales comerciales.</p>
+<ul class="font-technical-data text-[13px] space-y-2 mb-4 text-primary-container">
+<li class="flex justify-between border-b border-surface-variant pb-1"><span>Volumen:</span> <span class="font-bold">28.3 m³</span></li>
+<li class="flex justify-between border-b border-surface-variant pb-1"><span>Largo ext:</span> <span class="font-bold">6.06 m</span></li>
+</ul>
+<button class="w-full py-2 border border-primary-container text-primary-container font-technical-data text-[13px] font-bold hover:bg-surface-variant transition-colors uppercase">Ficha Técnica</button>
+</div>
+<!-- 10ft Card -->
+<div class="bg-white border border-outline-variant p-6 flex-1 flex flex-col">
+<h4 class="font-headline-lg text-[20px] leading-6 text-primary-container mb-2">Modelo 10 FT</h4>
+<p class="text-on-surface-variant text-sm mb-4 flex-1">Ultra compacto. Perfecto para eventos o expansiones rápidas.</p>
+<ul class="font-technical-data text-[13px] space-y-2 mb-4 text-primary-container">
+<li class="flex justify-between border-b border-surface-variant pb-1"><span>Volumen:</span> <span class="font-bold">14.1 m³</span></li>
+<li class="flex justify-between border-b border-surface-variant pb-1"><span>Largo ext:</span> <span class="font-bold">2.99 m</span></li>
+</ul>
+<button class="w-full py-2 border border-primary-container text-primary-container font-technical-data text-[13px] font-bold hover:bg-surface-variant transition-colors uppercase">Ficha Técnica</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Exhibidores y Bateas (Commercial Line) -->
+<section class="w-full py-section-gap px-margin-edge bg-surface-container-low border-y border-outline-variant" id="comercial">
+<div class="max-w-[1280px] mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-4">Línea Comercial: Exhibición y Bateas</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Sistemas diseñados para la venta directa al público, combinando estética impecable con rendimiento térmico superior.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+<!-- Exhibidor Vertical -->
+<div class="bg-white border border-outline-variant flex flex-col h-full group hover:shadow-[0_4px_20px_-4px_rgba(10,37,64,0.1)] transition-shadow duration-300">
+<div class="relative w-full h-80 overflow-hidden border-b border-outline-variant bg-surface-variant">
+<img alt="Exhibidor Vertical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPr04QuopphuDHaJtJtfMLZJqT8q6MNKsz1Kq92iPyupeeAiwExMd648qNTm6jjHBsJ5pxtDPP9yNltH_RolTb2u7i9WZEnkDLe6dUm0dMzxNtMTpslbJtd9ejb_pR6QkQxEYzHGnh_pKtBf7Fqgx0c3UtYqmsDym-bH_t7SDsTl4YipzmhSSQrJe-rgUkaRD-txVTf_Dd8U7ZnVPdTfZUNTGl1QEJZN4QwI_aTim-WeeC27156tzAc5Y1GzeJaShGhurZ9vhdgaU"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-technical-data text-[11px] font-bold uppercase border border-outline-variant">Línea Supermercado</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<h3 class="font-headline-lg text-[24px] text-primary-container mb-3">Exhibidores Verticales de Lácteos</h3>
+<p class="text-on-surface-variant mb-6 flex-1">Cortinas de aire optimizadas para reducir la pérdida de frío. Iluminación LED integrada de alta fidelidad cromática.</p>
+<div class="space-y-3 font-technical-data text-[13px] text-primary-container mb-8">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">ac_unit</span> <span>Temp: 2°C a 8°C</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">straighten</span> <span>Modulos desde 1.25m a 3.75m</span></div>
+</div>
+<button class="w-full py-3 bg-primary text-white font-technical-data text-technical-data font-bold hover:bg-primary-container transition-colors uppercase">Cotizar Módulos</button>
+</div>
+</div>
+<!-- Batea Carnicera -->
+<div class="bg-white border border-outline-variant flex flex-col h-full group hover:shadow-[0_4px_20px_-4px_rgba(10,37,64,0.1)] transition-shadow duration-300">
+<div class="relative w-full h-80 overflow-hidden border-b border-outline-variant bg-surface-variant">
+<img alt="Batea Carnicera" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0jCOvPibWbJNBAwJOD2cOETVVHg-tep2KWGk5gPzGJfrTNLdyDpOvaBJD9XJxf3Bzsw3xLwBmhGd1Hvlxu1lOvi_JMNv7GI-Qe1-I5meFxcg7_Y1OMEodw41jvezDvoUwAArPuSFCvjcXlNq6ueXzQkjd1UtoN_lIlUqKwm-zcwNJnM5qXrlTMYFOz6NMfxC1i6k_Q2fZcblHDQAkZz7gbRIoQe2NEzfLgJFZkdU6lsyCFsOl4_zf7Rf_NTDReCci7EszPVu3Nqo"/>
+<div class="absolute top-4 left-4">
+<span class="px-3 py-1 bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-technical-data text-[11px] font-bold uppercase border border-outline-variant">Línea Carnicería</span>
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<h3 class="font-headline-lg text-[24px] text-primary-container mb-3">Bateas Carniceras Inox</h3>
+<p class="text-on-surface-variant mb-6 flex-1">Interior en acero inoxidable AISI 304. Sistema de frío estático o forzado según requerimiento del cliente.</p>
+<div class="space-y-3 font-technical-data text-[13px] text-primary-container mb-8">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">ac_unit</span> <span>Temp: 0°C a 5°C</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">straighten</span> <span>Profundidad de exhibición: 900mm</span></div>
+</div>
+<button class="w-full py-3 bg-primary text-white font-technical-data text-technical-data font-bold hover:bg-primary-container transition-colors uppercase">Cotizar Batea</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Evaporators & Contract Modes Section -->
+<section class="w-full py-section-gap px-margin-edge bg-white">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter-md">
+<!-- Evaporators Specs -->
+<div class="lg:col-span-7 bg-surface-container-low border border-outline-variant p-8 md:p-10 flex flex-col relative overflow-hidden">
+<!-- Accent Bar -->
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<h2 class="font-headline-lg text-headline-lg text-primary-container mb-6">Unidades Evaporadoras</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 max-w-lg">Sistemas de intercambio térmico de alta eficiencia para cámaras frigoríficas industriales.</p>
+<div class="relative w-full aspect-video mb-8 border border-outline-variant">
+<img alt="Unidad Evaporadora Industrial" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1whkSeMMZ0LBqwSl7d5ZCC-Y3WCMUKA1zRng1EVqqnXq5K_cfUXTtlfjdaFJdGJW_jOKbij_iQZfbn6miIVwgLshxAhXB820D2JkjEmABfAEB6OBBmYJwRHl6GGf3Cdl1JKWr8wwraICaJwSjEwMOyQqwtvNFMB51zRrf6_L1HDH6MyNmb6CoUY1nr4QREgY2Cs9_ogDyptXu7zCkigWTXHaKPtJlr4Noch1_bU5G_SufvaQMTje3kcZV8hkbHSw9o-MQXBsyCDw"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 font-technical-data text-sm">
+<div class="border-l-2 border-surface-variant pl-4">
+<span class="block text-outline text-[11px] uppercase mb-1">Capacidad Frigorífica</span>
+<span class="font-bold text-primary-container block">Desde 2.5 kW hasta 80 kW</span>
+</div>
+<div class="border-l-2 border-surface-variant pl-4">
+<span class="block text-outline text-[11px] uppercase mb-1">Paso de Aleta</span>
+<span class="font-bold text-primary-container block">4.5mm / 6.0mm / 9.0mm</span>
+</div>
+<div class="border-l-2 border-surface-variant pl-4">
+<span class="block text-outline text-[11px] uppercase mb-1">Descongelamiento</span>
+<span class="font-bold text-primary-container block">Eléctrico / Gas Caliente</span>
+</div>
+<div class="border-l-2 border-surface-variant pl-4">
+<span class="block text-outline text-[11px] uppercase mb-1">Carcasa</span>
+<span class="font-bold text-primary-container block">Aluminio Magnesio Pinta blanca</span>
+</div>
+</div>
+</div>
+<!-- Contract Modes Sidebar -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="bg-primary-container text-white p-8 md:p-10 flex-1 flex flex-col justify-center">
+<h3 class="font-headline-lg text-[28px] mb-8">Modalidades de Adquisición</h3>
+<div class="space-y-6">
+<!-- Venta Directa -->
+<div class="flex gap-4 items-start group">
+<div class="w-12 h-12 bg-white/10 rounded-none flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-safety-orange transition-colors duration-300">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] mb-1">Venta Directa</h4>
+<p class="text-white/70 text-sm font-body-md">Equipos nuevos y reacondicionados con garantía de 12 meses y servicio técnico prioritario.</p>
+</div>
+</div>
+<!-- Alquiler Mensual -->
+<div class="flex gap-4 items-start group">
+<div class="w-12 h-12 bg-white/10 rounded-none flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-secondary-fixed-dim group-hover:text-primary-container transition-colors duration-300">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] mb-1">Alquiler Mensual</h4>
+<p class="text-white/70 text-sm font-body-md">Ideal para picos de producción o eventos. Mantenimiento preventivo incluido en la cuota.</p>
+</div>
+</div>
+<!-- Leasing -->
+<div class="flex gap-4 items-start group">
+<div class="w-12 h-12 bg-white/10 rounded-none flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-primary-fixed group-hover:text-primary-container transition-colors duration-300">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] mb-1">Leasing Operativo</h4>
+<p class="text-white/70 text-sm font-body-md">Renovación tecnológica constante. Cuotas deducibles de impuestos con opción a compra.</p>
+</div>
+</div>
+</div>
+<button class="mt-10 w-full py-4 bg-safety-orange text-white font-technical-data text-technical-data font-bold hover:bg-[#e64500] transition-colors uppercase tracking-wider">
+                            Consultar Opciones
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary w-full py-section-gap border-t border-outline-variant dark:border-industrial-gray">
+<div class="max-w-[1280px] mx-auto px-margin-edge grid grid-cols-1 md:grid-cols-4 gap-gutter-md">
+<!-- Brand & Copyright -->
+<div class="md:col-span-2 flex flex-col justify-between h-full">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-primary mb-4">MK REFRIGERACIONES</h2>
+<p class="font-body-md text-body-md text-on-primary opacity-70 max-w-sm">Soluciones industriales y comerciales en sistemas de frío. Especialistas en mantener la cadena térmica con precisión.</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-primary opacity-70 mt-8 md:mt-0">
+                    © 2024 MK Refrigeraciones. Ruta 12, Garupá, Misiones. Excelencia en Frío Industrial.
+                </p>
+</div>
+<!-- Links Column 1 -->
+<div class="flex flex-col gap-4">
+<h3 class="font-technical-data text-technical-data font-bold text-secondary-fixed mb-2 uppercase tracking-wider">Navegación</h3>
+<a class="font-body-md text-body-md text-on-primary opacity-70 hover:opacity-100 hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Servicios</a>
+<a class="font-body-md text-body-md text-on-primary opacity-70 hover:opacity-100 hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Proyectos</a>
+<a class="font-body-md text-body-md text-on-primary opacity-70 hover:opacity-100 hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Equipos</a>
+</div>
+<!-- Links Column 2 -->
+<div class="flex flex-col gap-4">
+<h3 class="font-technical-data text-technical-data font-bold text-secondary-fixed mb-2 uppercase tracking-wider">Atención</h3>
+<a class="font-body-md text-body-md text-on-primary opacity-70 hover:opacity-100 hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Soporte Técnico</a>
+<a class="font-body-md text-body-md text-on-primary opacity-70 hover:opacity-100 hover:text-secondary-fixed-dim transition-colors cursor-default" href="#">Contacto</a>
+</div>
+</div>
+</footer>
+</body></html>

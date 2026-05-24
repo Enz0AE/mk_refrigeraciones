@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - MK Refrigeraciones Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700;800&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#768dad",
+                        "surface-container": "#efedf0",
+                        "frost-blue": "#E2E8F0",
+                        "industrial-gray": "#475569",
+                        "surface": "#faf9fb",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#004e5a",
+                        "on-secondary": "#ffffff",
+                        "outline": "#74777e",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8ea",
+                        "inverse-on-surface": "#f2f0f3",
+                        "safety-orange": "#FF4D00",
+                        "on-surface-variant": "#43474d",
+                        "error": "#ba1a1a",
+                        "tertiary": "#0c1011",
+                        "surface-dim": "#dbd9dc",
+                        "secondary": "#006877",
+                        "on-tertiary-fixed": "#191c1e",
+                        "primary-fixed": "#d2e4ff",
+                        "on-tertiary-container": "#898c8e",
+                        "on-secondary-container": "#005f6d",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c6ce",
+                        "secondary-fixed-dim": "#00daf8",
+                        "on-primary-fixed-variant": "#314865",
+                        "surface-variant": "#e3e2e5",
+                        "inverse-surface": "#2f3033",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "background": "#faf9fb",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b0c8eb",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b0c8eb",
+                        "secondary-container": "#00e0ff",
+                        "secondary-fixed": "#a5eeff",
+                        "primary": "#000f22",
+                        "primary-container": "#0a2540",
+                        "tertiary-container": "#212527",
+                        "on-primary-fixed": "#001c37",
+                        "on-surface": "#1b1c1e",
+                        "on-secondary-fixed": "#001f25",
+                        "on-background": "#1b1c1e",
+                        "surface-bright": "#faf9fb",
+                        "surface-tint": "#49607e",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-container-low": "#f5f3f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter-sm": "16px",
+                        "gutter-md": "24px",
+                        "section-gap": "80px",
+                        "margin-edge": "32px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "technical-data": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "technical-data": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for data tables to maintain industrial look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8FAFC; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- NavigationDrawer (SideNav) - CMS Anchored -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 w-64 bg-primary-container border-r border-outline-variant flat no shadows transition-all duration-300">
+<!-- Header Profile -->
+<div class="p-gutter-md border-b border-outline-variant/30 flex flex-col items-start gap-4">
+<div class="flex items-center gap-3 w-full">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container flex-shrink-0 border-2 border-primary-fixed">
+<img alt="Admin User" class="w-full h-full object-cover" data-alt="Professional corporate headshot of a male admin user in a modern industrial setting. Bright, clear lighting, emphasizing reliability and technical competence. High-contrast corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4HKo6EDFO-sSm0NJTKo0JXT-hpL1_ZTAmttiuSgA3h51P4qpOUrlFy9-n1leKuuymMg7-ejniTYWuSEebpZrV_yeA757z05cSZdJOQPxGwmp2I6RAsUwKxZFBD9FEolaMkiwbndqrrnMTVksjlR-CGPwXFO66sU3m4lrDf4rceCKwupKrb1r2FrH7lXqpKpOjIuqeLDujv9eOQ5g8oZZ-lSGhCnGxDp4sF2Yrljr5O_rsjqGw1DH1WkTAHmZ7XSdktVtfuzrzVGs"/>
+</div>
+<div class="overflow-hidden">
+<h2 class="font-headline-lg-mobile text-[18px] leading-tight text-on-primary font-bold truncate" title="Admin MK">Admin MK</h2>
+<p class="font-label-sm text-label-sm text-on-primary-container truncate" title="Gestión Central">Gestión Central</p>
+</div>
+</div>
+<div class="px-2 py-1 bg-surface-tint/30 rounded text-on-primary-container font-technical-data text-[10px] uppercase tracking-wider self-start">
+                v2.0.4
+            </div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto py-gutter-sm flex flex-col gap-1 px-2">
+<!-- Active: Dashboard -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container font-bold px-4 py-3 border-l-4 border-safety-orange rounded-r-DEFAULT transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined icon-fill">dashboard</span>
+<span class="font-body-md text-[15px]">Dashboard</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 text-on-primary-container px-4 py-3 hover:bg-white/10 rounded-r-DEFAULT transition-colors cursor-pointer border-l-4 border-transparent group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-primary transition-colors">list_alt</span>
+<span class="font-body-md text-[15px] group-hover:text-on-primary transition-colors">Cotizaciones</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container px-4 py-3 hover:bg-white/10 rounded-r-DEFAULT transition-colors cursor-pointer border-l-4 border-transparent group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-primary transition-colors">photo_library</span>
+<span class="font-body-md text-[15px] group-hover:text-on-primary transition-colors">Galería</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container px-4 py-3 hover:bg-white/10 rounded-r-DEFAULT transition-colors cursor-pointer border-l-4 border-transparent group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-primary transition-colors">construction</span>
+<span class="font-body-md text-[15px] group-hover:text-on-primary transition-colors">Servicios</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container px-4 py-3 hover:bg-white/10 rounded-r-DEFAULT transition-colors cursor-pointer border-l-4 border-transparent group" href="#">
+<span class="material-symbols-outlined group-hover:text-on-primary transition-colors">settings</span>
+<span class="font-body-md text-[15px] group-hover:text-on-primary transition-colors">Configuración</span>
+</a>
+</div>
+<!-- Footer / Logout area -->
+<div class="p-gutter-sm border-t border-outline-variant/30">
+<a class="flex items-center gap-3 text-on-primary-container px-4 py-3 hover:bg-error/20 hover:text-error-container rounded transition-colors cursor-pointer group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-[15px]">Cerrar Sesión</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 h-full overflow-y-auto bg-[#F8FAFC] flex flex-col">
+<!-- Top App Bar (Contextual for CMS) -->
+<header class="sticky top-0 z-30 bg-surface-container-lowest border-b border-frost-blue px-margin-edge h-16 flex items-center justify-between">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary-container font-bold">Resumen de Operaciones</h1>
+<div class="flex items-center gap-gutter-sm">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container flex items-center justify-center text-industrial-gray transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-safety-orange rounded-full"></span>
+</button>
+<div class="h-6 w-px bg-frost-blue"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-industrial-gray">calendar_today</span>
+<span class="font-technical-data text-technical-data text-on-surface-variant">24 Oct, 2023</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-margin-edge max-w-[1400px] w-full mx-auto flex flex-col gap-gutter-md">
+<!-- Metrics Row -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter-sm">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest border border-frost-blue rounded-DEFAULT p-gutter-sm flex items-start justify-between relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="pl-2 flex flex-col gap-2">
+<p class="font-technical-data text-technical-data text-industrial-gray uppercase tracking-wider">Cotizaciones Nuevas</p>
+<h3 class="font-display-lg text-display-lg text-primary-container">12</h3>
+<div class="flex items-center gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+4 esta semana</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded bg-primary-fixed/20 flex items-center justify-center text-primary-fixed-variant">
+<span class="material-symbols-outlined icon-fill text-[28px]">request_quote</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest border border-frost-blue rounded-DEFAULT p-gutter-sm flex items-start justify-between relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="pl-2 flex flex-col gap-2">
+<p class="font-technical-data text-technical-data text-industrial-gray uppercase tracking-wider">Equipos en Alquiler</p>
+<h3 class="font-display-lg text-display-lg text-primary-container">45</h3>
+<div class="flex items-center gap-1 text-industrial-gray">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+<span class="font-label-sm text-label-sm">85% ocupación</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container flex items-center justify-center text-industrial-gray">
+<span class="material-symbols-outlined icon-fill text-[28px]">ac_unit</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest border border-frost-blue rounded-DEFAULT p-gutter-sm flex items-start justify-between relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-safety-orange"></div>
+<div class="pl-2 flex flex-col gap-2">
+<p class="font-technical-data text-technical-data text-industrial-gray uppercase tracking-wider">Mensajes de Hoy</p>
+<h3 class="font-display-lg text-display-lg text-primary-container">8</h3>
+<div class="flex items-center gap-1 text-safety-orange">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+<span class="font-label-sm text-label-sm">3 requieren atención</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded bg-error-container/50 flex items-center justify-center text-error">
+<span class="material-symbols-outlined icon-fill text-[28px]">chat</span>
+</div>
+</div>
+</section>
+<!-- Complex Area: Chart & Quick Actions -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter-md">
+<!-- Chart Area (Takes up 2 columns) -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-frost-blue rounded-DEFAULT flex flex-col">
+<div class="p-gutter-sm border-b border-frost-blue flex items-center justify-between">
+<h3 class="font-headline-lg-mobile text-[18px] text-primary-container font-bold">Actividad de Cotizaciones (Últimos 7 Días)</h3>
+<button class="text-industrial-gray hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="p-gutter-sm flex-1 min-h-[250px] relative w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0gNDAgMCBMIDAgMCAwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNFMkU4RjAiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')]">
+<!-- Pseudo-Chart Bars (Industrial Brutalism Style) -->
+<div class="absolute bottom-gutter-sm left-gutter-sm right-gutter-sm top-gutter-sm flex items-end justify-between gap-2 px-4">
+<div class="w-full bg-secondary-container/20 hover:bg-secondary-container/40 transition-colors h-[30%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">3</div></div>
+<div class="w-full bg-secondary-container/60 hover:bg-secondary-container/80 transition-colors h-[60%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">6</div></div>
+<div class="w-full bg-secondary-container/40 hover:bg-secondary-container/60 transition-colors h-[40%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">4</div></div>
+<div class="w-full bg-primary-container hover:bg-primary transition-colors h-[90%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">9</div></div>
+<div class="w-full bg-secondary-container/30 hover:bg-secondary-container/50 transition-colors h-[50%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">5</div></div>
+<div class="w-full bg-safety-orange hover:bg-[#E64500] transition-colors h-[100%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">12</div></div>
+<div class="w-full bg-secondary-container/50 hover:bg-secondary-container/70 transition-colors h-[70%] relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 font-technical-data text-xs hidden group-hover:block bg-primary-container text-white px-2 py-0.5 rounded">7</div></div>
+</div>
+<!-- X Axis Labels -->
+<div class="absolute -bottom-1 left-gutter-sm right-gutter-sm flex justify-between px-4 font-technical-data text-[10px] text-industrial-gray uppercase">
+<span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="bg-surface-container-lowest border border-frost-blue rounded-DEFAULT flex flex-col">
+<div class="p-gutter-sm border-b border-frost-blue">
+<h3 class="font-headline-lg-mobile text-[18px] text-primary-container font-bold">Acciones Rápidas</h3>
+</div>
+<div class="p-gutter-sm flex flex-col gap-3">
+<button class="w-full bg-safety-orange hover:bg-[#E64500] text-on-primary font-body-md font-bold py-3 px-4 rounded-DEFAULT flex items-center justify-center gap-2 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+                            Añadir Proyecto a Galería
+                        </button>
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary font-body-md py-3 px-4 rounded-DEFAULT flex items-center justify-center gap-2 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined">edit_document</span>
+                            Editar Precios de Alquiler
+                        </button>
+<div class="h-px bg-frost-blue my-2 w-full"></div>
+<button class="w-full border border-primary-container text-primary-container hover:bg-surface-container font-body-md py-2 px-4 rounded-DEFAULT flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">person_add</span>
+                            Nuevo Usuario Admin
+                        </button>
+</div>
+</div>
+</section>
+<!-- Data Table: Últimas Cotizaciones -->
+<section class="bg-surface-container-lowest border border-frost-blue rounded-DEFAULT flex flex-col overflow-hidden">
+<div class="p-gutter-sm border-b border-frost-blue flex items-center justify-between bg-surface-container-low">
+<h3 class="font-headline-lg-mobile text-[18px] text-primary-container font-bold">Últimas Cotizaciones</h3>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-industrial-gray text-[18px]">search</span>
+<input class="pl-8 pr-3 py-1.5 border border-outline-variant rounded font-body-md text-sm focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container w-64 bg-surface-container-lowest placeholder:text-outline" placeholder="Buscar ID o Cliente..." type="text"/>
+</div>
+<button class="px-3 py-1.5 border border-outline-variant rounded hover:bg-surface-container text-industrial-gray flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span class="font-technical-data text-sm">Filtros</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b 2 border-frost-blue bg-surface-container-low text-industrial-gray font-technical-data text-[12px] uppercase tracking-wider">
+<th class="p-3 font-medium">ID</th>
+<th class="p-3 font-medium">Cliente / Empresa</th>
+<th class="p-3 font-medium">Servicio Solicitado</th>
+<th class="p-3 font-medium">Fecha</th>
+<th class="p-3 font-medium">Estado</th>
+<th class="p-3 font-medium text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-[14px]">
+<!-- Row 1: Urgent -->
+<tr class="border-b border-frost-blue hover:bg-surface-bright transition-colors group cursor-pointer bg-[#FFF6F0]">
+<td class="p-3 font-technical-data text-primary-container font-medium">#COT-8492</td>
+<td class="p-3">
+<div class="font-bold text-primary-container">Frigorífico del Norte SA</div>
+<div class="text-[12px] text-industrial-gray">contacto@frigonorte.com</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-industrial-gray">ac_unit</span>
+<span>Instalación Panel 100mm</span>
+</div>
+</td>
+<td class="p-3 font-technical-data text-industrial-gray">Hoy, 08:30 AM</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-[#FFEDD5] text-safety-orange font-technical-data text-[11px] uppercase tracking-wide border border-[#FDBA74]">
+                                        Urgente
+                                    </span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary-container hover:text-safety-orange transition-colors p-1">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Standard -->
+<tr class="border-b border-frost-blue hover:bg-surface-bright transition-colors group cursor-pointer">
+<td class="p-3 font-technical-data text-primary-container font-medium">#COT-8491</td>
+<td class="p-3">
+<div class="font-bold text-primary-container">Supermercados El Sol</div>
+<div class="text-[12px] text-industrial-gray">compras@elsol.com.ar</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-industrial-gray">build</span>
+<span>Mantenimiento Preventivo</span>
+</div>
+</td>
+<td class="p-3 font-technical-data text-industrial-gray">Ayer, 16:45 PM</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-[#E0F2FE] text-on-secondary-container font-technical-data text-[11px] uppercase tracking-wide border border-[#BAE6FD]">
+                                        Pendiente
+                                    </span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary-container hover:text-secondary-container transition-colors p-1">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Standard -->
+<tr class="border-b border-frost-blue hover:bg-surface-bright transition-colors group cursor-pointer">
+<td class="p-3 font-technical-data text-primary-container font-medium">#COT-8490</td>
+<td class="p-3">
+<div class="font-bold text-primary-container">Martín Gómez</div>
+<div class="text-[12px] text-industrial-gray">Particular</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-industrial-gray">inventory_2</span>
+<span>Alquiler Contenedor 20ft</span>
+</div>
+</td>
+<td class="p-3 font-technical-data text-industrial-gray">22 Oct, 11:20 AM</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-[#DCFCE7] text-[#166534] font-technical-data text-[11px] uppercase tracking-wide border border-[#86EFAC]">
+                                        Revisado
+                                    </span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary-container hover:text-secondary-container transition-colors p-1">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Standard -->
+<tr class="hover:bg-surface-bright transition-colors group cursor-pointer">
+<td class="p-3 font-technical-data text-primary-container font-medium">#COT-8489</td>
+<td class="p-3">
+<div class="font-bold text-primary-container">Logística Misiones SRL</div>
+<div class="text-[12px] text-industrial-gray">info@logmisiones.com</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-industrial-gray">ac_unit</span>
+<span>Reparación Cámara Frigorífica</span>
+</div>
+</td>
+<td class="p-3 font-technical-data text-industrial-gray">21 Oct, 09:15 AM</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-[#DCFCE7] text-[#166534] font-technical-data text-[11px] uppercase tracking-wide border border-[#86EFAC]">
+                                        Revisado
+                                    </span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary-container hover:text-secondary-container transition-colors p-1">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 border-t border-frost-blue bg-surface-container-lowest flex items-center justify-center">
+<button class="text-primary-container font-technical-data text-sm hover:underline hover:text-secondary-container transition-colors flex items-center gap-1">
+                        Ver todas las cotizaciones
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+</body></html>
