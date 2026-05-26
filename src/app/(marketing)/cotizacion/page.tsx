@@ -220,8 +220,9 @@ export default function CotizacionPage() {
                 <h2 className="font-heading text-headline-lg text-primary mb-6">Datos de Contacto</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block font-mono text-technical text-primary mb-2">Nombre *</label>
+                    <label className="block font-mono text-technical text-primary mb-2" htmlFor="cot-name">Nombre *</label>
                     <input
+                      id="cot-name"
                       type="text"
                       value={form.name}
                       onChange={(e) => update("name", e.target.value)}
@@ -229,12 +230,16 @@ export default function CotizacionPage() {
                       className={`w-full bg-surface-bright border p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none ${
                         errors.name ? "border-safety-orange" : "border-outline-variant"
                       }`}
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "error-cot-name" : undefined}
                     />
-                    {errors.name && <p className="font-mono text-technical text-safety-orange mt-1">{errors.name}</p>}
+                    {errors.name && <p id="error-cot-name" className="font-mono text-technical text-safety-orange mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <label className="block font-mono text-technical text-primary mb-2">Empresa / Razón Social</label>
+                    <label className="block font-mono text-technical text-primary mb-2" htmlFor="cot-company">Empresa / Razón Social</label>
                     <input
+                      id="cot-company"
                       type="text"
                       value={form.company}
                       onChange={(e) => update("company", e.target.value)}
@@ -243,8 +248,9 @@ export default function CotizacionPage() {
                     />
                   </div>
                   <div>
-                    <label className="block font-mono text-technical text-primary mb-2">Email *</label>
+                    <label className="block font-mono text-technical text-primary mb-2" htmlFor="cot-email">Email *</label>
                     <input
+                      id="cot-email"
                       type="email"
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
@@ -252,12 +258,16 @@ export default function CotizacionPage() {
                       className={`w-full bg-surface-bright border p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none ${
                         errors.email ? "border-safety-orange" : "border-outline-variant"
                       }`}
+                      aria-required="true"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "error-cot-email" : undefined}
                     />
-                    {errors.email && <p className="font-mono text-technical text-safety-orange mt-1">{errors.email}</p>}
+                    {errors.email && <p id="error-cot-email" className="font-mono text-technical text-safety-orange mt-1">{errors.email}</p>}
                   </div>
                   <div>
-                    <label className="block font-mono text-technical text-primary mb-2">Teléfono *</label>
+                    <label className="block font-mono text-technical text-primary mb-2" htmlFor="cot-phone">Teléfono *</label>
                     <input
+                      id="cot-phone"
                       type="tel"
                       value={form.phone}
                       onChange={(e) => update("phone", e.target.value)}
@@ -265,8 +275,11 @@ export default function CotizacionPage() {
                       className={`w-full bg-surface-bright border p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none ${
                         errors.phone ? "border-safety-orange" : "border-outline-variant"
                       }`}
+                      aria-required="true"
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={errors.phone ? "error-cot-phone" : undefined}
                     />
-                    {errors.phone && <p className="font-mono text-technical text-safety-orange mt-1">{errors.phone}</p>}
+                    {errors.phone && <p id="error-cot-phone" className="font-mono text-technical text-safety-orange mt-1">{errors.phone}</p>}
                   </div>
                 </div>
               </div>

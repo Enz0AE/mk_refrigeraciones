@@ -256,43 +256,43 @@ function InstallFormContent() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" aria-label="Formulario de solicitud de instalación">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block font-mono text-technical text-primary mb-2">EMPRESA / RAZÓN SOCIAL</label>
-          <input value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass("company", !!errors.company)} type="text" />
-          {errors.company && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.company}</p>}
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-company">EMPRESA / RAZÓN SOCIAL *</label>
+          <input id="inst-company" value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass("company", !!errors.company)} type="text" aria-required="true" aria-invalid={!!errors.company} aria-describedby={errors.company ? "error-inst-company" : undefined} />
+          {errors.company && <p id="error-inst-company" className="text-safety-orange font-mono text-[12px] mt-1">{errors.company}</p>}
         </div>
         <div>
-          <label className="block font-mono text-technical text-primary mb-2">CONTACTO TÉCNICO</label>
-          <input value={form.contact} onChange={(e) => update("contact", e.target.value)} className={inputClass("contact", !!errors.contact)} type="text" />
-          {errors.contact && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.contact}</p>}
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-contact">CONTACTO TÉCNICO *</label>
+          <input id="inst-contact" value={form.contact} onChange={(e) => update("contact", e.target.value)} className={inputClass("contact", !!errors.contact)} type="text" aria-required="true" aria-invalid={!!errors.contact} aria-describedby={errors.contact ? "error-inst-contact" : undefined} />
+          {errors.contact && <p id="error-inst-contact" className="text-safety-orange font-mono text-[12px] mt-1">{errors.contact}</p>}
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label className="block font-mono text-technical text-primary mb-2">TIPO DE CÁMARA</label>
-          <select value={form.chamberType} onChange={(e) => update("chamberType", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 rounded-none appearance-none">
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-type">TIPO DE CÁMARA</label>
+          <select id="inst-type" value={form.chamberType} onChange={(e) => update("chamberType", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 rounded-none appearance-none">
             <option>Media Temperatura (0° a 5°C)</option>
             <option>Baja Temperatura (-20° a -25°C)</option>
             <option>Túnel de Congelado</option>
           </select>
         </div>
         <div>
-          <label className="block font-mono text-technical text-primary mb-2">VOLUMEN ESTIMADO (m³)</label>
-          <input value={form.volume} onChange={(e) => update("volume", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="number" />
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-volume">VOLUMEN ESTIMADO (m³)</label>
+          <input id="inst-volume" value={form.volume} onChange={(e) => update("volume", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="number" />
         </div>
         <div>
-          <label className="block font-mono text-technical text-primary mb-2">UBICACIÓN (Provincia)</label>
-          <input value={form.location} onChange={(e) => update("location", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-location">UBICACIÓN (Provincia)</label>
+          <input id="inst-location" value={form.location} onChange={(e) => update("location", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
         </div>
       </div>
       <div>
-        <label className="block font-mono text-technical text-primary mb-2">ESPECIFICACIONES ADICIONALES</label>
-        <textarea value={form.details} onChange={(e) => update("details", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" rows={4} />
+        <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-details">ESPECIFICACIONES ADICIONALES</label>
+        <textarea id="inst-details" value={form.details} onChange={(e) => update("details", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" rows={4} />
       </div>
       {status === "error" && (
-        <p className="text-safety-orange font-mono text-technical">Error al enviar. Intente nuevamente.</p>
+        <p className="text-safety-orange font-mono text-technical" role="alert">Error al enviar. Intente nuevamente.</p>
       )}
       <div className="flex justify-end pt-4">
         <button

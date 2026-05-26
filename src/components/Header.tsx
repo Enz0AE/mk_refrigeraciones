@@ -1,13 +1,53 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (menuOpen) {
+      closeRef.current?.focus();
+      document.body.style.overflow = "hidden";
+    } else {
+      hamburgerRef.current?.focus();
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!menuOpen) return;
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !drawerRef.current) return;
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
   return (
-    <nav className="bg-primary text-on-primary sticky top-0 w-full z-50 h-20 border-b border-outline-variant">
+    <nav className="bg-primary text-on-primary sticky top-0 w-full z-50 h-20 border-b border-outline-variant" aria-label="Navegación principal">
       <div className="flex items-center justify-between max-w-[1280px] mx-auto px-margin-edge w-full h-full">
         <Link
           href="/"
@@ -15,7 +55,7 @@ export default function Header() {
         >
           MK REFRIGERACIONES
         </Link>
-        <div className="hidden md:flex gap-gutter-md items-center h-full">
+        <div className="hidden md:flex gap-gutter-md items-center h-full" role="list">
           <Link
             href="/instalaciones"
             className="font-label-sm text-label-sm text-on-primary opacity-80 hover:opacity-100 h-full flex items-center hover:bg-primary-container px-4 transition-all duration-200"
@@ -54,9 +94,12 @@ export default function Header() {
           SOLICITAR PRESUPUESTO
         </Link>
         <button
+          ref={hamburgerRef}
           className="md:hidden text-on-primary"
           onClick={() => setMenuOpen(true)}
-          aria-label="Abrir menú"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-label="Abrir menú de navegación"
         >
           <span className="material-symbols-outlined text-[32px]">menu</span>
         </button>
@@ -66,10 +109,16 @@ export default function Header() {
         <div
           className="fixed inset-0 z-40 bg-black/50 md:hidden"
           onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
         />
       )}
 
       <div
+        ref={drawerRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú de navegación móvil"
         className={`fixed top-0 right-0 z-50 h-full w-72 bg-primary border-l border-outline-variant transform transition-transform duration-300 md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -79,14 +128,15 @@ export default function Header() {
             Menú
           </span>
           <button
+            ref={closeRef}
             onClick={() => setMenuOpen(false)}
             className="text-on-primary p-1"
-            aria-label="Cerrar menú"
+            aria-label="Cerrar menú de navegación"
           >
             <span className="material-symbols-outlined text-[32px]">close</span>
           </button>
         </div>
-        <nav className="flex flex-col py-4">
+        <nav className="flex flex-col py-4" aria-label="Enlaces del menú móvil">
           <Link
             href="/"
             className="px-6 py-4 text-on-primary opacity-80 hover:opacity-100 hover:bg-primary-container transition-colors font-body text-body-md"

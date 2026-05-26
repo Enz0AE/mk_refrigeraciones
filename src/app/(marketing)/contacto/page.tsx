@@ -73,32 +73,41 @@ export default function ContactoPage() {
                 <p className="font-body text-body-md text-[#15803D] mt-1">Nos pondremos en contacto pronto.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" aria-label="Formulario de contacto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block font-mono text-technical text-primary mb-2">Nombre *</label>
+                    <label className="block font-mono text-technical text-primary mb-2" htmlFor="contact-name">Nombre *</label>
                     <input
+                      id="contact-name"
                       type="text"
                       value={form.name}
                       onChange={(e) => update("name", e.target.value)}
                       className={inputClass("name")}
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "error-contact-name" : undefined}
                     />
-                    {errors.name && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.name}</p>}
+                    {errors.name && <p id="error-contact-name" className="text-safety-orange font-mono text-[12px] mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <label className="block font-mono text-technical text-primary mb-2">Email *</label>
+                    <label className="block font-mono text-technical text-primary mb-2" htmlFor="contact-email">Email *</label>
                     <input
+                      id="contact-email"
                       type="email"
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
                       className={inputClass("email")}
+                      aria-required="true"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "error-contact-email" : undefined}
                     />
-                    {errors.email && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.email}</p>}
+                    {errors.email && <p id="error-contact-email" className="text-safety-orange font-mono text-[12px] mt-1">{errors.email}</p>}
                   </div>
                 </div>
                 <div>
-                  <label className="block font-mono text-technical text-primary mb-2">Teléfono</label>
+                  <label className="block font-mono text-technical text-primary mb-2" htmlFor="contact-phone">Teléfono</label>
                   <input
+                    id="contact-phone"
                     type="tel"
                     value={form.phone}
                     onChange={(e) => update("phone", e.target.value)}
@@ -106,17 +115,21 @@ export default function ContactoPage() {
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-technical text-primary mb-2">Mensaje *</label>
+                  <label className="block font-mono text-technical text-primary mb-2" htmlFor="contact-message">Mensaje *</label>
                   <textarea
+                    id="contact-message"
                     rows={5}
                     value={form.message}
                     onChange={(e) => update("message", e.target.value)}
                     className={inputClass("message")}
+                    aria-required="true"
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "error-contact-message" : undefined}
                   />
-                  {errors.message && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.message}</p>}
+                  {errors.message && <p id="error-contact-message" className="text-safety-orange font-mono text-[12px] mt-1">{errors.message}</p>}
                 </div>
                 {status === "error" && (
-                  <p className="text-safety-orange font-mono text-technical">Error al enviar. Intente nuevamente.</p>
+                  <p className="text-safety-orange font-mono text-technical" role="alert">Error al enviar. Intente nuevamente.</p>
                 )}
                 <button
                   type="submit"

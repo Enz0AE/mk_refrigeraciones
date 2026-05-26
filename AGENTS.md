@@ -110,7 +110,7 @@ src/
 - [x] **12. CMS funcional** — Dashboard con métricas reales, CRUD de blog posts (crear/publicar/archivar/eliminar), tabla de cotizaciones.
 - [x] **13. Mapa integrado** — OpenStreetMap iframe en contacto.
 - [x] **14. Filtro de categorías blog** — Lógica de filtrado client-side funcional.
-- [ ] **15. Accesibilidad WCAG 2.1 AA** — Skip-to-content, ARIA labels, focus management.
+- [x] **15. Accesibilidad WCAG 2.1 AA** — Skip-to-content, ARIA labels, focus management.
 
 ### 🔵 Fase 4 — Pulido
 
