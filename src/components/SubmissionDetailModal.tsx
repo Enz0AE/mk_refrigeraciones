@@ -1,11 +1,15 @@
 "use client";
 
+import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+
 type SubmissionType = "cotizaciones" | "contactos" | "instalaciones";
 
 interface SubmissionDetailModalProps {
   type: SubmissionType;
   data: Record<string, unknown> | null;
   onClose: () => void;
+  onRefresh: () => void;
 }
 
 const FIELDS: Record<SubmissionType, { key: string; label: string }[]> = {
@@ -40,16 +44,40 @@ const FIELDS: Record<SubmissionType, { key: string; label: string }[]> = {
   ],
 };
 
+const STATUS_OPTIONS = ["pendiente", "contactado", "finalizado"];
+
+const STATUS_STYLES: Record<string, string> = {
+  pendiente: "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]",
+  contactado: "bg-[#DBEAFE] text-[#1E40AF] border-[#93C5FD]",
+  finalizado: "bg-[#DCFCE7] text-[#166534] border-[#86EFAC]",
+};
+
+function getStatusColor(status: string): string {
+  return STATUS_STYLES[status] || STATUS_STYLES.pendiente;
+}
+
 export default function SubmissionDetailModal({
   type,
   data,
   onClose,
+  onRefresh,
 }: SubmissionDetailModalProps) {
+  const [updating, setUpdating] = useState(false);
+
   if (!data) return null;
 
   const fields = FIELDS[type];
+  const id = data.id as string;
   const status = data.status as string;
   const createdAt = data.created_at as string;
+
+  const handleStatusChange = async (newStatus: string) => {
+    setUpdating(true);
+    const supabase = createClient();
+    await supabase.from(type).update({ status: newStatus }).eq("id", id);
+    setUpdating(false);
+    onRefresh();
+  };
 
   return (
     <div
@@ -93,17 +121,20 @@ export default function SubmissionDetailModal({
             <span className="block font-mono text-technical text-on-surface-variant uppercase mb-0.5">
               Estado
             </span>
-            <span
-              className={`inline-flex px-2 py-0.5 font-mono text-xs uppercase border ${
-                status === "pendiente"
-                  ? "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]"
-                  : status === "contactado"
-                    ? "bg-[#DBEAFE] text-[#1E40AF] border-[#93C5FD]"
-                    : "bg-[#DCFCE7] text-[#166534] border-[#86EFAC]"
-              }`}
+            <select
+              value={status}
+              onChange={(e) => handleStatusChange(e.target.value)}
+              disabled={updating}
+              className={`mt-1 px-3 py-1.5 font-mono text-xs uppercase border cursor-pointer focus:outline-none ${
+                getStatusColor(status)
+              } ${updating ? "opacity-50" : ""}`}
             >
-              {status}
-            </span>
+              {STATUS_OPTIONS.map((opt) => (
+                <option key={opt} value={opt} className="bg-white text-primary">
+                  {opt}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>

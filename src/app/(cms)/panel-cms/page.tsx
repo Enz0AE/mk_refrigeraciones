@@ -46,31 +46,27 @@ export default function PanelCMSPage() {
 
   const [blogEditorPost, setBlogEditorPost] = useState<BlogPostFull | null | undefined>(undefined);
 
-  const fetchPosts = useCallback(async () => {
-    const supabase = createClient();
-    const { data } = await supabase
-      .from("blog_posts")
-      .select("id, title, slug, published")
-      .order("created_at", { ascending: false });
-    if (data) setBlogPosts(data as BlogPost[]);
-  }, []);
-
-  useEffect(() => {
+  const refreshAll = useCallback(async () => {
     const supabase = createClient();
 
-    Promise.all([
+    const [cotRes, conRes, insRes, blogRes] = await Promise.all([
       supabase.from("cotizaciones").select("*").order("created_at", { ascending: false }),
       supabase.from("contactos").select("*").order("created_at", { ascending: false }),
       supabase.from("instalaciones").select("*").order("created_at", { ascending: false }),
       supabase.from("blog_posts").select("id, title, slug, published").order("created_at", { ascending: false }),
-    ]).then(([cotRes, conRes, insRes, blogRes]) => {
-      if (cotRes.data) setCotizaciones(cotRes.data as Submission[]);
-      if (conRes.data) setContactos(conRes.data as Submission[]);
-      if (insRes.data) setInstalaciones(insRes.data as Submission[]);
-      if (blogRes.data) setBlogPosts(blogRes.data as BlogPost[]);
-      setLoading(false);
-    });
+    ]);
+
+    if (cotRes.data) setCotizaciones(cotRes.data as Submission[]);
+    if (conRes.data) setContactos(conRes.data as Submission[]);
+    if (insRes.data) setInstalaciones(insRes.data as Submission[]);
+    if (blogRes.data) setBlogPosts(blogRes.data as BlogPost[]);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    refreshAll();
+  }, [refreshAll]);
 
   const handleSelectItem = (type: TabType, item: Submission) => {
     setModalType(type);
@@ -98,7 +94,7 @@ export default function PanelCMSPage() {
 
   const handleBlogSaved = () => {
     setBlogEditorPost(undefined);
-    fetchPosts();
+    refreshAll();
   };
 
   if (loading) {
@@ -206,7 +202,7 @@ export default function PanelCMSPage() {
                         onClick={async () => {
                           const supabase = createClient();
                           await supabase.from("blog_posts").update({ published: !post.published }).eq("id", post.id);
-                          fetchPosts();
+                          refreshAll();
                         }}
                         className="text-technical font-mono text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
                       >
@@ -217,7 +213,7 @@ export default function PanelCMSPage() {
                           if (!confirm(`¿Eliminar "${post.title}"?`)) return;
                           const supabase = createClient();
                           await supabase.from("blog_posts").delete().eq("id", post.id);
-                          fetchPosts();
+                          refreshAll();
                         }}
                         className="text-technical font-mono text-safety-orange hover:text-red-700 transition-colors px-2 py-1"
                       >
@@ -246,6 +242,7 @@ export default function PanelCMSPage() {
           type={modalType}
           data={modalData}
           onClose={handleCloseModal}
+          onRefresh={refreshAll}
         />
       )}
 

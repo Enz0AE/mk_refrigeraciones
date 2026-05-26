@@ -210,20 +210,42 @@ export default function InstalacionesPage() {
 }
 
 function InstallFormContent() {
-  const [form, setForm] = useState({ company: "", contact: "", chamberType: "Media Temperatura (0° a 5°C)", volume: "", location: "", details: "" });
-  const [errors, setErrors] = useState<Partial<Record<"company" | "contact", string>>>({});
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    tipo: "Media Temperatura (0° a 5°C)",
+    dimensions: "",
+    temp_range: "",
+    location: "",
+    details: "",
+  });
+  const [errors, setErrors] = useState<Partial<Record<"name" | "email" | "phone", string>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
+  const TIPO_TEMP_RANGE: Record<string, string> = {
+    "Media Temperatura (0° a 5°C)": "0°C a 5°C",
+    "Baja Temperatura (-20° a -25°C)": "-20°C a -25°C",
+    "Túnel de Congelado": "-30°C a -40°C",
+  };
+
   const update = (field: string, value: string) => {
-    setForm((f) => ({ ...f, [field]: value }));
+    setForm((f) => {
+      const next = { ...f, [field]: value };
+      if (field === "tipo") next.temp_range = TIPO_TEMP_RANGE[value] || "";
+      return next;
+    });
     if (errors[field as keyof typeof errors]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const fieldErrors: typeof errors = {};
-    if (!form.company.trim()) fieldErrors.company = "La empresa es requerida";
-    if (!form.contact.trim()) fieldErrors.contact = "El contacto técnico es requerido";
+    if (!form.name.trim()) fieldErrors.name = "El nombre es requerido";
+    if (!form.email.trim()) fieldErrors.email = "El email es requerido";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) fieldErrors.email = "Email inválido";
+    if (!form.phone.trim()) fieldErrors.phone = "El teléfono es requerido";
     setErrors(fieldErrors);
     if (Object.keys(fieldErrors).length > 0) return;
     setStatus("sending");
@@ -235,6 +257,11 @@ function InstallFormContent() {
       });
       if (!res.ok) throw new Error();
       setStatus("sent");
+      setForm({
+        name: "", email: "", phone: "", company: "",
+        tipo: "Media Temperatura (0° a 5°C)", dimensions: "",
+        temp_range: "0°C a 5°C", location: "", details: "",
+      });
     } catch {
       setStatus("error");
     }
@@ -257,30 +284,41 @@ function InstallFormContent() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" aria-label="Formulario de solicitud de instalación">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-company">EMPRESA / RAZÓN SOCIAL *</label>
-          <input id="inst-company" value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass("company", !!errors.company)} type="text" aria-required="true" aria-invalid={!!errors.company} aria-describedby={errors.company ? "error-inst-company" : undefined} />
-          {errors.company && <p id="error-inst-company" className="text-safety-orange font-mono text-[12px] mt-1">{errors.company}</p>}
-        </div>
-        <div>
-          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-contact">CONTACTO TÉCNICO *</label>
-          <input id="inst-contact" value={form.contact} onChange={(e) => update("contact", e.target.value)} className={inputClass("contact", !!errors.contact)} type="text" aria-required="true" aria-invalid={!!errors.contact} aria-describedby={errors.contact ? "error-inst-contact" : undefined} />
-          {errors.contact && <p id="error-inst-contact" className="text-safety-orange font-mono text-[12px] mt-1">{errors.contact}</p>}
-        </div>
-      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-name">NOMBRE *</label>
+          <input id="inst-name" value={form.name} onChange={(e) => update("name", e.target.value)} className={inputClass("name", !!errors.name)} type="text" aria-required="true" aria-invalid={!!errors.name} aria-describedby={errors.name ? "error-inst-name" : undefined} />
+          {errors.name && <p id="error-inst-name" className="text-safety-orange font-mono text-[12px] mt-1">{errors.name}</p>}
+        </div>
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-email">EMAIL *</label>
+          <input id="inst-email" value={form.email} onChange={(e) => update("email", e.target.value)} className={inputClass("email", !!errors.email)} type="email" aria-required="true" aria-invalid={!!errors.email} aria-describedby={errors.email ? "error-inst-email" : undefined} />
+          {errors.email && <p id="error-inst-email" className="text-safety-orange font-mono text-[12px] mt-1">{errors.email}</p>}
+        </div>
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-phone">TELÉFONO *</label>
+          <input id="inst-phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass("phone", !!errors.phone)} type="tel" aria-required="true" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "error-inst-phone" : undefined} />
+          {errors.phone && <p id="error-inst-phone" className="text-safety-orange font-mono text-[12px] mt-1">{errors.phone}</p>}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-company">EMPRESA / RAZÓN SOCIAL</label>
+          <input id="inst-company" value={form.company} onChange={(e) => update("company", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+        </div>
+        <div>
           <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-type">TIPO DE CÁMARA</label>
-          <select id="inst-type" value={form.chamberType} onChange={(e) => update("chamberType", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 rounded-none appearance-none">
+          <select id="inst-type" value={form.tipo} onChange={(e) => update("tipo", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 rounded-none appearance-none">
             <option>Media Temperatura (0° a 5°C)</option>
             <option>Baja Temperatura (-20° a -25°C)</option>
             <option>Túnel de Congelado</option>
           </select>
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-volume">VOLUMEN ESTIMADO (m³)</label>
-          <input id="inst-volume" value={form.volume} onChange={(e) => update("volume", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="number" />
+          <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-dimensions">DIMENSIONES ESTIMADAS</label>
+          <input id="inst-dimensions" value={form.dimensions} onChange={(e) => update("dimensions", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" placeholder="Ej: 6m x 4m x 3m" />
         </div>
         <div>
           <label className="block font-mono text-technical text-primary mb-2" htmlFor="inst-location">UBICACIÓN (Provincia)</label>
