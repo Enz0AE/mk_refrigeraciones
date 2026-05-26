@@ -1,16 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
-
-interface Cotizacion {
-  id: string;
-  name: string;
-  email: string;
-  service: string;
-  status: string;
-  created_at: string;
-}
+import FormSubmissionsTabs from "@/components/FormSubmissionsTabs";
+import SubmissionDetailModal from "@/components/SubmissionDetailModal";
+import BlogEditor from "@/components/BlogEditor";
+import AnalyticsWidgets from "@/components/AnalyticsWidgets";
 
 interface BlogPost {
   id: string;
@@ -19,26 +14,92 @@ interface BlogPost {
   published: boolean;
 }
 
+interface BlogPostFull extends BlogPost {
+  excerpt: string;
+  content: string;
+  category: string;
+  date: string;
+  read_time: string;
+  image: string;
+}
+
+interface Submission {
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+  created_at: string;
+  [key: string]: unknown;
+}
+
+type TabType = "cotizaciones" | "contactos" | "instalaciones";
+
 export default function PanelCMSPage() {
-  const [cotizaciones, setCotizaciones] = useState<Cotizacion[]>([]);
+  const [cotizaciones, setCotizaciones] = useState<Submission[]>([]);
+  const [contactos, setContactos] = useState<Submission[]>([]);
+  const [instalaciones, setInstalaciones] = useState<Submission[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  const [cotizacionesCount, setCotizacionesCount] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const [modalType, setModalType] = useState<TabType | null>(null);
+  const [modalData, setModalData] = useState<Submission | null>(null);
+
+  const [blogEditorPost, setBlogEditorPost] = useState<BlogPostFull | null | undefined>(undefined);
+
+  const fetchPosts = useCallback(async () => {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("id, title, slug, published")
+      .order("created_at", { ascending: false });
+    if (data) setBlogPosts(data as BlogPost[]);
+  }, []);
 
   useEffect(() => {
     const supabase = createClient();
 
     Promise.all([
-      supabase.from("cotizaciones").select("*").order("created_at", { ascending: false }).limit(5),
-      supabase.from("cotizaciones").select("*", { count: "exact", head: true }),
+      supabase.from("cotizaciones").select("*").order("created_at", { ascending: false }),
+      supabase.from("contactos").select("*").order("created_at", { ascending: false }),
+      supabase.from("instalaciones").select("*").order("created_at", { ascending: false }),
       supabase.from("blog_posts").select("id, title, slug, published").order("created_at", { ascending: false }),
-    ]).then(([cotizacionesRes, countRes, blogRes]) => {
-      if (cotizacionesRes.data) setCotizaciones(cotizacionesRes.data as Cotizacion[]);
-      if (countRes.count !== null) setCotizacionesCount(countRes.count);
+    ]).then(([cotRes, conRes, insRes, blogRes]) => {
+      if (cotRes.data) setCotizaciones(cotRes.data as Submission[]);
+      if (conRes.data) setContactos(conRes.data as Submission[]);
+      if (insRes.data) setInstalaciones(insRes.data as Submission[]);
       if (blogRes.data) setBlogPosts(blogRes.data as BlogPost[]);
       setLoading(false);
     });
   }, []);
+
+  const handleSelectItem = (type: TabType, item: Submission) => {
+    setModalType(type);
+    setModalData(item);
+  };
+
+  const handleCloseModal = () => {
+    setModalType(null);
+    setModalData(null);
+  };
+
+  const handleEditBlog = async (post: BlogPost) => {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("id", post.id)
+      .single();
+    if (data) setBlogEditorPost(data as BlogPostFull);
+  };
+
+  const handleNewBlog = () => {
+    setBlogEditorPost(null);
+  };
+
+  const handleBlogSaved = () => {
+    setBlogEditorPost(undefined);
+    fetchPosts();
+  };
 
   if (loading) {
     return (
@@ -72,47 +133,38 @@ export default function PanelCMSPage() {
       </div>
 
       {/* Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-white border border-outline-variant p-6">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+        <div className="bg-white border border-outline-variant p-4 md:p-6">
           <p className="font-mono text-technical text-on-surface-variant uppercase mb-1">Cotizaciones</p>
-          <p className="font-display text-display-lg text-primary">{cotizacionesCount}</p>
+          <p className="font-display text-display-lg text-primary">{cotizaciones.length}</p>
         </div>
-        <div className="bg-white border border-outline-variant p-6">
+        <div className="bg-white border border-outline-variant p-4 md:p-6">
+          <p className="font-mono text-technical text-on-surface-variant uppercase mb-1">Contactos</p>
+          <p className="font-display text-display-lg text-primary">{contactos.length}</p>
+        </div>
+        <div className="bg-white border border-outline-variant p-4 md:p-6">
+          <p className="font-mono text-technical text-on-surface-variant uppercase mb-1">Instalaciones</p>
+          <p className="font-display text-display-lg text-primary">{instalaciones.length}</p>
+        </div>
+        <div className="bg-white border border-outline-variant p-4 md:p-6">
           <p className="font-mono text-technical text-on-surface-variant uppercase mb-1">Blog Posts</p>
           <p className="font-display text-display-lg text-primary">{blogPosts.length}</p>
         </div>
-        <div className="bg-white border border-outline-variant p-6">
+        <div className="bg-white border border-outline-variant p-4 md:p-6">
           <p className="font-mono text-technical text-on-surface-variant uppercase mb-1">Publicados</p>
           <p className="font-display text-display-lg text-primary">{blogPosts.filter((p) => p.published).length}</p>
         </div>
       </div>
+
+      {/* Google Analytics */}
+      <AnalyticsWidgets />
 
       {/* Blog Posts */}
       <div className="bg-white border border-outline-variant mb-8">
         <div className="p-4 border-b border-outline-variant flex items-center justify-between">
           <h2 className="font-heading text-headline-mobile text-primary">Blog Posts</h2>
           <button
-            onClick={async () => {
-              const title = prompt("Título del nuevo post:");
-              if (!title) return;
-              const slug = title
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/^-|-$/g, "");
-              const supabase = createClient();
-              await supabase.from("blog_posts").insert({
-                slug,
-                title,
-                excerpt: "Escribí una descripción...",
-                content: "<p>Contenido del post</p>",
-                category: "General",
-                date: new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }),
-                read_time: "1 min",
-                image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFemx7OsdtB3Bt0WXTExXBp9Nc5WOdvlovAbEVDthmX7i-4EYMMTVBYSp5qlV1QvhH3_ZE9otuOOA0GC4DXmkTs4KBskxKx1p22GFUxMtvoX6TblFK8T1D4bD-3en9CaIibXzmk8agbe8GbMgxTlo3KXz3xoTmKU9Ko__clBvc2SgxwVQaqi6T4uKmyhG9vDPBwI8G1-7Z8a9mFTKNQQz6SxG5anYUMYCmtWqsdwoiKqMxEZvZvwaaNsEGLvOvyriFlQgUqJuUais",
-                published: false,
-              });
-              window.location.reload();
-            }}
+            onClick={handleNewBlog}
             className="bg-primary text-white font-mono font-bold px-4 py-2 text-technical hover:bg-primary-container transition-colors"
           >
             Nuevo Post
@@ -145,10 +197,16 @@ export default function PanelCMSPage() {
                   <td className="p-3 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button
+                        onClick={() => handleEditBlog(post)}
+                        className="text-technical font-mono text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
+                      >
+                        Editar
+                      </button>
+                      <button
                         onClick={async () => {
                           const supabase = createClient();
                           await supabase.from("blog_posts").update({ published: !post.published }).eq("id", post.id);
-                          window.location.reload();
+                          fetchPosts();
                         }}
                         className="text-technical font-mono text-on-surface-variant hover:text-primary transition-colors px-2 py-1"
                       >
@@ -159,7 +217,7 @@ export default function PanelCMSPage() {
                           if (!confirm(`¿Eliminar "${post.title}"?`)) return;
                           const supabase = createClient();
                           await supabase.from("blog_posts").delete().eq("id", post.id);
-                          window.location.reload();
+                          fetchPosts();
                         }}
                         className="text-technical font-mono text-safety-orange hover:text-red-700 transition-colors px-2 py-1"
                       >
@@ -174,49 +232,31 @@ export default function PanelCMSPage() {
         </div>
       </div>
 
-      {/* Últimas Cotizaciones */}
-      <div className="bg-white border border-outline-variant">
-        <div className="p-4 border-b border-outline-variant">
-          <h2 className="font-heading text-headline-mobile text-primary">Últimas Cotizaciones</h2>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b border-outline-variant bg-surface-container-low text-technical font-mono text-xs uppercase text-on-surface-variant">
-                <th className="p-3 font-medium">Cliente</th>
-                <th className="p-3 font-medium">Email</th>
-                <th className="p-3 font-medium">Servicio</th>
-                <th className="p-3 font-medium">Estado</th>
-                <th className="p-3 font-medium">Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cotizaciones.map((c) => (
-                <tr key={c.id} className="border-b border-outline-variant hover:bg-surface-bright transition-colors">
-                  <td className="p-3 font-body text-primary font-medium">{c.name}</td>
-                  <td className="p-3 font-mono text-technical text-on-surface-variant">{c.email}</td>
-                  <td className="p-3 text-on-surface-variant">{c.service}</td>
-                  <td className="p-3">
-                    <span className="inline-flex px-2 py-0.5 font-mono text-xs uppercase border bg-[#E0F2FE] text-[#0369a1] border-[#BAE6FD]">
-                      {c.status}
-                    </span>
-                  </td>
-                  <td className="p-3 font-mono text-technical text-on-surface-variant">
-                    {new Date(c.created_at).toLocaleDateString("es-AR")}
-                  </td>
-                </tr>
-              ))}
-              {cotizaciones.length === 0 && (
-                <tr>
-                  <td colSpan={5} className="p-6 text-center text-on-surface-variant font-body">
-                    No hay cotizaciones aún.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Form Submissions Tabs */}
+      <FormSubmissionsTabs
+        cotizaciones={cotizaciones}
+        contactos={contactos}
+        instalaciones={instalaciones}
+        onSelectItem={handleSelectItem}
+      />
+
+      {/* Detail Modal */}
+      {modalType && modalData && (
+        <SubmissionDetailModal
+          type={modalType}
+          data={modalData}
+          onClose={handleCloseModal}
+        />
+      )}
+
+      {/* Blog Editor Modal */}
+      {blogEditorPost !== undefined && (
+        <BlogEditor
+          post={blogEditorPost}
+          onClose={() => setBlogEditorPost(undefined)}
+          onSaved={handleBlogSaved}
+        />
+      )}
     </div>
   );
 }

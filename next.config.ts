@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "lh3.googleusercontent.com",
         pathname: "/aida-public/**",
       },
+      {
+        protocol: "https",
+        hostname: "wdcmkftufzsfbrjlrfuo.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
     deviceSizes: [640, 768, 1024, 1280, 1536],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],

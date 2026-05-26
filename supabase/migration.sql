@@ -159,3 +159,14 @@ CREATE POLICY "Auth full access servicios" ON servicios FOR ALL USING (auth.role
 CREATE POLICY "Auth full access cotizaciones" ON cotizaciones FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
 CREATE POLICY "Auth full access contactos" ON contactos FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
 CREATE POLICY "Auth full access instalaciones" ON instalaciones FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+
+-- 4. STORAGE BUCKET
+-- ------------------------------------------------
+
+INSERT INTO storage.buckets (id, name, public) VALUES ('images', 'images', true)
+ON CONFLICT (id) DO NOTHING;
+
+CREATE POLICY "Public read images" ON storage.objects FOR SELECT USING (bucket_id = 'images');
+CREATE POLICY "Auth upload images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'images' AND auth.role() = 'authenticated');
+CREATE POLICY "Auth update images" ON storage.objects FOR UPDATE USING (bucket_id = 'images' AND auth.role() = 'authenticated');
+CREATE POLICY "Auth delete images" ON storage.objects FOR DELETE USING (bucket_id = 'images' AND auth.role() = 'authenticated');
