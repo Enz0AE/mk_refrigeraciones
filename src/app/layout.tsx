@@ -7,24 +7,27 @@ const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
   title: "MK Refrigeraciones - Expertos en Frío Industrial",
   description:
-    "Diseño, montaje y mantenimiento de infraestructuras frigoríficas modulares en Garupá, Misiones. 20 años de trayectoria.",
+    "Diseño, montaje y mantenimiento de infraestructuras frigoríficas modulares en Garupá, Misiones. 20 años de trayectoria",
 };
 
 export default function RootLayout({
@@ -38,6 +41,10 @@ export default function RootLayout({
       className={`${hankenGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable}`}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://lh3.googleusercontent.com" />
+        <link rel="dns-prefetch" href="https://lh3.googleusercontent.com" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
@@ -62,6 +69,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');`}
         </Script>
+
       </body>
     </html>
   );

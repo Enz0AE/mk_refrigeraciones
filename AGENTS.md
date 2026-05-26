@@ -116,8 +116,8 @@ src/
 
 - [x] **16. Copyright dinámico** — `new Date().getFullYear()`.
 - [x] **17. Página 404 personalizada** — `not-found.tsx` en marketing layout.
-- [ ] **18. Optimización rendimiento** — Core Web Vitals targets.
-- [ ] **19. CI/CD** — Deploy a Vercel.
+- [x] **18. Optimización rendimiento** — Preconnect hints, `preload: true` en fonts, `deviceSizes` + `imageSizes` + `formats: ["webp","avif"]` en next.config, caching headers, Priority hints en hero image, security headers (X-Content-Type-Options, X-Frame-Options, Referrer-Policy).
+- [ ] **19. CI/CD** — Deploy a Vercel (pendiente de que el usuario complete el setup en Vercel Dashboard).
 
 ## Setup Instructions
 
