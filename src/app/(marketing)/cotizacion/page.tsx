@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, FormEvent, useEffect } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const steps = [
   { label: "Servicio", icon: "construction" },
@@ -24,6 +23,7 @@ export default function CotizacionPage() {
   }, []);
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errors, setErrors] = useState<Partial<Record<"name" | "email" | "phone", string>>>({});
   const [form, setForm] = useState({
     service: "",
     temp: "",
@@ -36,13 +36,30 @@ export default function CotizacionPage() {
     details: "",
   });
 
-  const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
+  const update = (field: string, value: string) => {
+    setForm((f) => ({ ...f, [field]: value }));
+    if (errors[field as keyof typeof errors]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
 
-  const canProceed = () => {
+  const hasRequired = () => {
     if (step === 0) return !!form.service;
-    if (step === 1) return true;
-    if (step === 2) return !!form.name && !!form.email && !!form.phone;
+    if (step === 2) return !!form.name.trim() && !!form.email.trim() && !!form.phone.trim();
     return true;
+  };
+
+  const validateStep = () => {
+    if (step !== 2) return true;
+    const fieldErrors: typeof errors = {};
+    if (!form.name.trim()) fieldErrors.name = "El nombre es requerido";
+    if (!form.email.trim()) fieldErrors.email = "El email es requerido";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) fieldErrors.email = "Email inválido";
+    if (!form.phone.trim()) fieldErrors.phone = "El teléfono es requerido";
+    setErrors(fieldErrors);
+    return Object.keys(fieldErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep()) setStep((s) => s + 1);
   };
 
   const handleSubmit = async () => {
@@ -209,8 +226,11 @@ export default function CotizacionPage() {
                       value={form.name}
                       onChange={(e) => update("name", e.target.value)}
                       placeholder="Su nombre"
-                      className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
+                      className={`w-full bg-surface-bright border p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none ${
+                        errors.name ? "border-safety-orange" : "border-outline-variant"
+                      }`}
                     />
+                    {errors.name && <p className="font-mono text-technical text-safety-orange mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label className="block font-mono text-technical text-primary mb-2">Empresa / Razón Social</label>
@@ -229,8 +249,11 @@ export default function CotizacionPage() {
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
                       placeholder="correo@ejemplo.com"
-                      className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
+                      className={`w-full bg-surface-bright border p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none ${
+                        errors.email ? "border-safety-orange" : "border-outline-variant"
+                      }`}
                     />
+                    {errors.email && <p className="font-mono text-technical text-safety-orange mt-1">{errors.email}</p>}
                   </div>
                   <div>
                     <label className="block font-mono text-technical text-primary mb-2">Teléfono *</label>
@@ -239,8 +262,11 @@ export default function CotizacionPage() {
                       value={form.phone}
                       onChange={(e) => update("phone", e.target.value)}
                       placeholder="+54 376 412-3456"
-                      className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
+                      className={`w-full bg-surface-bright border p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none ${
+                        errors.phone ? "border-safety-orange" : "border-outline-variant"
+                      }`}
                     />
+                    {errors.phone && <p className="font-mono text-technical text-safety-orange mt-1">{errors.phone}</p>}
                   </div>
                 </div>
               </div>
@@ -300,8 +326,8 @@ export default function CotizacionPage() {
               )}
               {step < steps.length - 1 ? (
                 <button
-                  onClick={() => setStep((s) => s + 1)}
-                  disabled={!canProceed()}
+                  onClick={handleNext}
+                  disabled={!hasRequired()}
                   className="bg-primary text-white font-mono font-bold px-8 py-3 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-primary-container transition-colors text-technical"
                 >
                   Continuar

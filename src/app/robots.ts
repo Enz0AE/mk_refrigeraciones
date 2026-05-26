@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/panel-cms", "/api/"],
       },
     ],
-    sitemap: "https://mkrefrigeraciones.com/sitemap.xml",
+    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || "https://mkrefrigeraciones.com"}/sitemap.xml`,
   };
 }

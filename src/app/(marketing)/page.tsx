@@ -24,7 +24,7 @@ export default function Home() {
     name: "MK Refrigeraciones",
     description: "Diseño, montaje y mantenimiento de infraestructuras frigoríficas modulares en Garupá, Misiones.",
     url: "https://mkrefrigeraciones.com",
-    telephone: "+54 9 376 412-3456",
+    telephone: process.env.NEXT_PUBLIC_PHONE_SALES || "+54 9 376 412-3456",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Garupá",

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, FormEvent, useEffect } from "react";
 
 export default function InstalacionesPage() {
@@ -212,13 +211,21 @@ export default function InstalacionesPage() {
 
 function InstallFormContent() {
   const [form, setForm] = useState({ company: "", contact: "", chamberType: "Media Temperatura (0° a 5°C)", volume: "", location: "", details: "" });
+  const [errors, setErrors] = useState<Partial<Record<"company" | "contact", string>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
+  const update = (field: string, value: string) => {
+    setForm((f) => ({ ...f, [field]: value }));
+    if (errors[field as keyof typeof errors]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.company || !form.contact) return;
+    const fieldErrors: typeof errors = {};
+    if (!form.company.trim()) fieldErrors.company = "La empresa es requerida";
+    if (!form.contact.trim()) fieldErrors.contact = "El contacto técnico es requerido";
+    setErrors(fieldErrors);
+    if (Object.keys(fieldErrors).length > 0) return;
     setStatus("sending");
     try {
       const res = await fetch("/api/instalaciones", {
@@ -232,6 +239,11 @@ function InstallFormContent() {
       setStatus("error");
     }
   };
+
+  const inputClass = (field: string, hasError: boolean) =>
+    `w-full bg-surface-bright border p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 ${
+      hasError ? "border-safety-orange" : "border-frost-blue"
+    }`;
 
   if (status === "sent") {
     return (
@@ -248,11 +260,13 @@ function InstallFormContent() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block font-mono text-technical text-primary mb-2">EMPRESA / RAZÓN SOCIAL</label>
-          <input value={form.company} onChange={(e) => update("company", e.target.value)} required className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+          <input value={form.company} onChange={(e) => update("company", e.target.value)} className={inputClass("company", !!errors.company)} type="text" />
+          {errors.company && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.company}</p>}
         </div>
         <div>
           <label className="block font-mono text-technical text-primary mb-2">CONTACTO TÉCNICO</label>
-          <input value={form.contact} onChange={(e) => update("contact", e.target.value)} required className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+          <input value={form.contact} onChange={(e) => update("contact", e.target.value)} className={inputClass("contact", !!errors.contact)} type="text" />
+          {errors.contact && <p className="text-safety-orange font-mono text-[12px] mt-1">{errors.contact}</p>}
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

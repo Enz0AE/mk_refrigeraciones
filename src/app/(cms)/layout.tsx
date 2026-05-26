@@ -1,7 +1,9 @@
+import AuthGuard from "@/components/AuthGuard";
+
 export default function CMSLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+  return <AuthGuard>{children}</AuthGuard>;
 }

@@ -30,12 +30,12 @@ export default function Footer() {
             <div className="bg-primary-container p-4 border border-outline-variant/30">
               <span className="material-symbols-outlined text-secondary-fixed-dim mb-2 block">phone_in_talk</span>
               <p className="text-technical font-mono text-on-primary">Ventas y Asesoramiento</p>
-              <p className="text-body-md font-bold mt-1 text-white">+54 9 376 412-3456</p>
+              <p className="text-body-md font-bold mt-1 text-white">{process.env.NEXT_PUBLIC_PHONE_SALES}</p>
             </div>
             <div className="bg-primary-container p-4 border border-outline-variant/30">
               <span className="material-symbols-outlined text-secondary-fixed-dim mb-2 block">build</span>
               <p className="text-technical font-mono text-on-primary">Guardia Técnica</p>
-              <p className="text-body-md font-bold mt-1 text-white">+54 9 376 498-7654</p>
+              <p className="text-body-md font-bold mt-1 text-white">{process.env.NEXT_PUBLIC_PHONE_TECH}</p>
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export default function WhatsAppButton() {
-  const phone = "5493764123456";
-  const message = encodeURIComponent("Hola! Quiero consultar sobre productos y servicios de MK Refrigeraciones.");
+  const phone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE;
+  const message = encodeURIComponent(process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "");
 
   return (
     <Link

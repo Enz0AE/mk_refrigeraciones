@@ -3,53 +3,41 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
-const posts = [
-  {
-    slug: "mantenimiento-camaras-frigorificas",
-    title: "Guía de Mantenimiento para Cámaras Frigoríficas Industriales",
-    excerpt: "Conozca las rutinas esenciales de mantenimiento preventivo para extender la vida útil de su cámara frigorífica y optimizar el consumo energético.",
-    category: "Mantenimiento",
-    date: "15 Mayo, 2024",
-    readTime: "5 min",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCFemx7OsdtB3Bt0WXTExXBp9Nc5WOdvlovAbEVDthmX7i-4EYMMTVBYSp5qlV1QvhH3_ZE9otuOOA0GC4DXmkTs4KBskxKx1p22GFUxMtvoX6TblFK8T1D4bD-3en9CaIibXzmk8agbe8GbMgxTlo3KXz3xoTmKU9Ko__clBvc2SgxwVQaqi6T4uKmyhG9vDPBwI8G1-7Z8a9mFTKNQQz6SxG5anYUMYCmtWqsdwoiKqMxEZvZvwaaNsEGLvOvyriFlQgUqJuUais",
-  },
-  {
-    slug: "contenedor-reefer-vs-camara-fija",
-    title: "Contenedor Reefer vs Cámara Frigorífica Fija: ¿Cuál Elegir?",
-    excerpt: "Análisis comparativo entre contenedores refrigerados y cámaras fijas para ayudarle a decidir la mejor solución según su necesidad operativa.",
-    category: "Comparativas",
-    date: "2 Mayo, 2024",
-    readTime: "7 min",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuApduDDfwVyhhZGREXXuvNkzGaJ2qws8jQMuhLYOha-MIYqZqyCqF7J-Mur_2GCs-llqF1jO35UhrWuXCAI48Ips1IWhn_xrzK7y13rMf2NNv9k6W9E94Hxn4J01Ga8kDkr9BxtPToqszxUk1T3wTTuUgmBN1WlS023B-BMPoe4nI5eZcJHROo5QzBYitWnifFTY9o7Rlp4kKs8F7E1ChLYYgh-KpQs4Mxb9z_LLb_lq57cu8ctYGbgbtD-a6BJBILIiAsbNd7ICis",
-  },
-  {
-    slug: "eficiencia-energetica-frio-industrial",
-    title: "Eficiencia Energética en Instalaciones de Frío Industrial",
-    excerpt: "Descubra las mejores prácticas y tecnologías disponibles para reducir el consumo energético en sus instalaciones frigoríficas.",
-    category: "Eficiencia",
-    date: "18 Abril, 2024",
-    readTime: "6 min",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB1whkSeMMZ0LBqwSl7d5ZCC-Y3WCMUKA1zRng1EVqqnXq5K_cfUXTtlfjdaFJdGJW_jOKbij_iQZfbn6miIVwgLshxAhXB820D2JkjEmABfAEB6OBBmYJwRHl6GGf3Cdl1JKWr8wwraICaJwSjEwMOyQqwtvNFMB51zRrf6_L1HDH6MyNmb6CoUY1nr4QREgY2Cs9_ogDyptXu7zCkigWTXHaKPtJlr4Noch1_bU5G_SufvaQMTje3kcZV8hkbHSw9o-MQXBsyCDw",
-  },
-  {
-    slug: "normativas-camaras-frigorificas-argentina",
-    title: "Normativas Vigentes para Cámaras Frigoríficas en Argentina",
-    excerpt: "Resumen de las principales regulaciones y normas técnicas que rigen la instalación y operación de cámaras frigoríficas en el país.",
-    category: "Normativas",
-    date: "5 Abril, 2024",
-    readTime: "8 min",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBzN-bQppD639mrCGoCsJ5eJDaajpkzxGFHe2VQOjmnzmiZLqMJmMo-SRt5Svn7KncJa0Nrf_YWt8mYYxQReddi5G50vM4PDkGfxNODe8nxI9QpOVg9vI2c8Lgwk9Lfe9fiDEOwGbeKbIEyoeB8Ua5E2zseidzsWyYRMbsj00SySM8xAvB0K8w4McRjMbeGc9Qdyc436uroDLHXdm_9MS6VArFpccolYEdBlAsYidvDNgPfjlEinuR6hagMMvO0XM801YzEDowUVh0",
-  },
-];
+interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  read_time: string;
+  image: string;
+}
 
 const categories = ["Todos", "Mantenimiento", "Comparativas", "Eficiencia", "Normativas"];
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("Todos");
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     document.title = "Blog Técnico — Frío Industrial y Mantenimiento | MK Refrigeraciones";
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) setPosts(data as BlogPost[]);
+        setLoading(false);
+      });
   }, []);
 
   const filtered = activeCategory === "Todos"
@@ -112,7 +100,7 @@ export default function BlogPage() {
                     <div className="flex items-center gap-3 text-label-sm font-mono text-on-surface-variant mb-3">
                       <span>{post.date}</span>
                       <span className="w-1 h-1 bg-outline rounded-full" />
-                      <span>{post.readTime}</span>
+                      <span>{post.read_time}</span>
                     </div>
                     <h2 className="font-heading text-headline-mobile text-primary mb-3 group-hover:text-secondary transition-colors">
                       <Link href={`/blog/${post.slug}`}>{post.title}</Link>
