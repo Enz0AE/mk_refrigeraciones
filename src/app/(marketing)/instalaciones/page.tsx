@@ -1,6 +1,13 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useState, FormEvent, useEffect } from "react";
 
 export default function InstalacionesPage() {
+  useEffect(() => {
+    document.title = "Instalaciones Frigoríficas — Cámaras de Frío Industrial | MK Refrigeraciones";
+  }, []);
   return (
     <>
       {/* Hero */}
@@ -117,10 +124,12 @@ export default function InstalacionesPage() {
             {/* Large Feature */}
             <div className="lg:col-span-8 group relative overflow-hidden border border-frost-blue bg-surface">
               <div className="aspect-[1.33] w-full bg-surface-container relative">
-                <img
+                <Image
                   alt="Industrial cold room installation"
-                  className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0fqef8oxBOo5Mm7TM69Hi_DAmQcFZIM9LLnVn3UL-FVKnPHdmAtDVj4enCCqJexMbLB-PKAlye24Kw8di26q4_UvP9wTuAuZn3q9JOAit-Xpap_amhEAlGyeMnDyHJCPFgIBZW_mAtuPaVw3aMlyuCrtLkYAhcgVprKCZbq1NbsFGAcZjwgQftioVRDzCawMgn0-yuw7rULfYW-cBj2_3ZcLKOit5dOAiEOIRQOBu8rC1r8Km7h2W2FT8tYowdi9o2RgRncoRySM"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300" />
               </div>
@@ -137,10 +146,12 @@ export default function InstalacionesPage() {
             {/* Vertical Feature */}
             <div className="lg:col-span-4 group relative overflow-hidden border border-frost-blue bg-surface">
               <div className="aspect-[0.75] w-full bg-surface-container relative">
-                <img
+                <Image
                   alt="Technical detail of refrigeration unit"
-                  className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwJp8VWNSZAzua6wSXKldM3vg9jBAF8Kv6fzHoRXPjQgs2G-EKjoMpbVF9li6EjlKU8wjT0PMxFgYPrs_norvOOCXF4bk8W1XCopQY4vVNyMt6znbLD-b_Jq0_yayGH_UF5KrHyRAZ6iQczi8A3-f9wTecFq9pDai3ydyoZafsDXrZnYwWCq33EeVXINcUYZ6-dwh65jsYRxyoo1Y1B_mZarkGAa1WMrd9lTMFWVQpajfPFQBpvXBQ6uNytpclkQUqcBPYb6WQg78"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300" />
               </div>
@@ -187,55 +198,97 @@ export default function InstalacionesPage() {
       <section className="py-section-gap bg-surface max-w-[1280px] mx-auto px-margin-edge w-full">
         <div className="max-w-3xl mx-auto border border-frost-blue bg-surface-container-lowest p-gutter-md shadow-[4px_4px_0px_rgba(10,37,64,0.1)]">
           <div className="mb-8 border-b border-frost-blue pb-4">
-            <h2 className="font-heading text-headline-lg text-primary">Consulta T&eacute;cnica</h2>
+            <h2 className="font-heading text-headline-lg text-primary">Consulta Técnica</h2>
             <p className="font-mono text-technical text-industrial-gray mt-2">
-              Complete los datos para solicitar pre-evaluaci&oacute;n de proyecto.
+              Complete los datos para solicitar pre-evaluación de proyecto.
             </p>
           </div>
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">EMPRESA / RAZ&Oacute;N SOCIAL</label>
-                <input className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
-              </div>
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">CONTACTO T&Eacute;CNICO</label>
-                <input className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">TIPO DE C&Aacute;MARA</label>
-                <select className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 rounded-none appearance-none">
-                  <option>Media Temperatura (0&deg; a 5&deg;C)</option>
-                  <option>Baja Temperatura (-20&deg; a -25&deg;C)</option>
-                  <option>T&uacute;nel de Congelado</option>
-                </select>
-              </div>
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">VOLUMEN ESTIMADO (m&sup3;)</label>
-                <input className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="number" />
-              </div>
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">UBICACI&Oacute;N (Provincia)</label>
-                <input className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
-              </div>
-            </div>
-            <div>
-              <label className="block font-mono text-technical text-primary mb-2">ESPECIFICACIONES ADICIONALES</label>
-              <textarea className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" rows={4} />
-            </div>
-            <div className="flex justify-end pt-4">
-              <button
-                className="bg-safety-orange text-on-primary font-mono font-bold px-8 py-3 hover:brightness-110 transition-colors flex items-center gap-2 text-technical"
-                type="button"
-              >
-                ENVIAR SOLICITUD <span className="material-symbols-outlined text-sm">send</span>
-              </button>
-            </div>
-          </form>
+          <InstallFormContent />
         </div>
       </section>
     </>
+  );
+}
+
+function InstallFormContent() {
+  const [form, setForm] = useState({ company: "", contact: "", chamberType: "Media Temperatura (0° a 5°C)", volume: "", location: "", details: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!form.company || !form.contact) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/instalaciones", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "sent") {
+    return (
+      <div className="bg-[#DCFCE7] border border-[#86EFAC] p-6 text-center">
+        <span className="material-symbols-outlined text-4xl text-[#166534] mb-2">check_circle</span>
+        <p className="font-heading text-headline-mobile text-[#166534]">Solicitud enviada</p>
+        <p className="font-body text-body-md text-[#15803D] mt-1">Evaluaremos su proyecto y lo contactaremos.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2">EMPRESA / RAZÓN SOCIAL</label>
+          <input value={form.company} onChange={(e) => update("company", e.target.value)} required className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+        </div>
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2">CONTACTO TÉCNICO</label>
+          <input value={form.contact} onChange={(e) => update("contact", e.target.value)} required className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2">TIPO DE CÁMARA</label>
+          <select value={form.chamberType} onChange={(e) => update("chamberType", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2 rounded-none appearance-none">
+            <option>Media Temperatura (0° a 5°C)</option>
+            <option>Baja Temperatura (-20° a -25°C)</option>
+            <option>Túnel de Congelado</option>
+          </select>
+        </div>
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2">VOLUMEN ESTIMADO (m³)</label>
+          <input value={form.volume} onChange={(e) => update("volume", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="number" />
+        </div>
+        <div>
+          <label className="block font-mono text-technical text-primary mb-2">UBICACIÓN (Provincia)</label>
+          <input value={form.location} onChange={(e) => update("location", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" type="text" />
+        </div>
+      </div>
+      <div>
+        <label className="block font-mono text-technical text-primary mb-2">ESPECIFICACIONES ADICIONALES</label>
+        <textarea value={form.details} onChange={(e) => update("details", e.target.value)} className="w-full bg-surface-bright border border-frost-blue p-3 focus:border-secondary focus:ring-0 font-body text-primary transition-colors focus:border-b-2" rows={4} />
+      </div>
+      {status === "error" && (
+        <p className="text-safety-orange font-mono text-technical">Error al enviar. Intente nuevamente.</p>
+      )}
+      <div className="flex justify-end pt-4">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="bg-safety-orange text-on-primary font-mono font-bold px-8 py-3 hover:brightness-110 transition-colors flex items-center gap-2 text-technical disabled:opacity-50"
+        >
+          {status === "sending" ? "ENVIANDO..." : "ENVIAR SOLICITUD"} <span className="material-symbols-outlined text-sm">send</span>
+        </button>
+      </div>
+    </form>
   );
 }

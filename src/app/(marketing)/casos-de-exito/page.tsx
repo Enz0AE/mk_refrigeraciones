@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Casos de Éxito — Proyectos de Frío Industrial | MK Refrigeraciones",
+  description:
+    "Conozca nuestros proyectos realizados: Centro Logístico Frontera, Planta Procesadora Sur y Supermercados Mayoristas en Misiones.",
+  openGraph: {
+    title: "Casos de Éxito — MK Refrigeraciones",
+    description:
+      "Proyectos de instalaciones frigoríficas, túneles de congelado y exhibición comercial ejecutados en la región del NEA.",
+  },
+};
 
 const cases = [
   {
@@ -56,10 +69,12 @@ export default function CasosDeExitoPage() {
             >
               <div className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
                 <div className="relative h-80 lg:h-full min-h-[300px] overflow-hidden bg-surface-variant">
-                  <img
+                  <Image
                     alt={c.title}
-                    className="w-full h-full object-cover"
                     src={c.image}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               </div>

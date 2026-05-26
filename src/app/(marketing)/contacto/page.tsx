@@ -1,6 +1,33 @@
+"use client";
+
 import Link from "next/link";
+import { useState, FormEvent, useEffect } from "react";
 
 export default function ContactoPage() {
+  useEffect(() => {
+    document.title = "Contacto — MK Refrigeraciones | Frío Industrial en Misiones";
+  }, []);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.message) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <>
       <section className="bg-primary text-on-primary py-16 md:py-24">
@@ -17,44 +44,67 @@ export default function ContactoPage() {
           {/* Form */}
           <div className="lg:col-span-7 bg-surface-container-lowest border border-outline-variant p-6 md:p-10">
             <h2 className="font-heading text-headline-lg text-primary mb-6">Envíenos un Mensaje</h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {status === "sent" ? (
+              <div className="bg-[#DCFCE7] border border-[#86EFAC] p-6 text-center">
+                <span className="material-symbols-outlined text-4xl text-[#166534] mb-2">check_circle</span>
+                <p className="font-heading text-headline-mobile text-[#166534]">Mensaje enviado con éxito</p>
+                <p className="font-body text-body-md text-[#15803D] mt-1">Nos pondremos en contacto pronto.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block font-mono text-technical text-primary mb-2">Nombre *</label>
+                    <input
+                      type="text"
+                      value={form.name}
+                      onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                      required
+                      className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-mono text-technical text-primary mb-2">Email *</label>
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                      required
+                      className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
+                    />
+                  </div>
+                </div>
                 <div>
-                  <label className="block font-mono text-technical text-primary mb-2">Nombre *</label>
+                  <label className="block font-mono text-technical text-primary mb-2">Teléfono</label>
                   <input
-                    type="text"
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                     className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-technical text-primary mb-2">Email *</label>
-                  <input
-                    type="email"
+                  <label className="block font-mono text-technical text-primary mb-2">Mensaje *</label>
+                  <textarea
+                    rows={5}
+                    value={form.message}
+                    onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                    required
                     className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
                   />
                 </div>
-              </div>
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">Teléfono</label>
-                <input
-                  type="tel"
-                  className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
-                />
-              </div>
-              <div>
-                <label className="block font-mono text-technical text-primary mb-2">Mensaje *</label>
-                <textarea
-                  rows={5}
-                  className="w-full bg-surface-bright border border-outline-variant p-3 font-body text-primary focus:border-secondary focus:border-b-2 transition-colors rounded-none"
-                />
-              </div>
-              <button
-                type="button"
-                className="bg-primary text-white font-mono font-bold px-8 py-3 hover:bg-primary-container transition-colors text-technical"
-              >
-                Enviar Mensaje
-              </button>
-            </form>
+                {status === "error" && (
+                  <p className="text-safety-orange font-mono text-technical">Error al enviar. Intente nuevamente.</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="bg-primary text-white font-mono font-bold px-8 py-3 hover:bg-primary-container transition-colors text-technical disabled:opacity-50"
+                >
+                  {status === "sending" ? "Enviando..." : "Enviar Mensaje"}
+                </button>
+              </form>
+            )}
           </div>
 
           {/* Info */}

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -82,11 +83,13 @@ export default function PanelCMSPage() {
         {/* Profile */}
         <div className="p-gutter-md border-b border-outline-variant/30 flex flex-col items-start gap-4">
           <div className="flex items-center gap-3 w-full">
-            <div className="w-12 h-12 rounded-full overflow-hidden bg-surface-container shrink-0 border-2 border-primary-fixed">
-              <img
+            <div className="w-12 h-12 rounded-full overflow-hidden bg-surface-container shrink-0 border-2 border-primary-fixed relative">
+              <Image
                 alt="Admin User"
-                className="w-full h-full object-cover"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4HKo6EDFO-sSm0NJTKo0JXT-hpL1_ZTAmttiuSgA3h51P4qpOUrlFy9-n1leKuuymMg7-ejniTYWuSEebpZrV_yeA757z05cSZdJOQPxGwmp2I6RAsUwKxZFBD9FEolaMkiwbndqrrnMTVksjlR-CGPwXFO66sU3m4lrDf4rceCKwupKrb1r2FrH7lXqpKpOjIuqeLDujv9eOQ5g8oZZ-lSGhCnGxDp4sF2Yrljr5O_rsjqGw1DH1WkTAHmZ7XSdktVtfuzrzVGs"
+                fill
+                className="object-cover"
+                sizes="48px"
               />
             </div>
             <div className="overflow-hidden">

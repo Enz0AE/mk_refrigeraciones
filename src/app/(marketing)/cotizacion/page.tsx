@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import Link from "next/link";
 
 const steps = [
@@ -19,7 +19,11 @@ const serviceOptions = [
 ];
 
 export default function CotizacionPage() {
+  useEffect(() => {
+    document.title = "Solicitar Presupuesto — MK Refrigeraciones | Cotización Frío Industrial";
+  }, []);
   const [step, setStep] = useState(0);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [form, setForm] = useState({
     service: "",
     temp: "",
@@ -40,6 +44,33 @@ export default function CotizacionPage() {
     if (step === 2) return !!form.name && !!form.email && !!form.phone;
     return true;
   };
+
+  const handleSubmit = async () => {
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/cotizacion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "sent") {
+    return (
+      <div className="bg-surface-container-lowest border border-outline-variant p-6 md:p-10 max-w-[800px] mx-auto mt-section-gap">
+        <div className="bg-[#DCFCE7] border border-[#86EFAC] p-6 text-center">
+          <span className="material-symbols-outlined text-4xl text-[#166534] mb-2">check_circle</span>
+          <p className="font-heading text-headline-mobile text-[#166534]">Solicitud enviada con éxito</p>
+          <p className="font-body text-body-md text-[#15803D] mt-1">Recibirá una cotización en menos de 24 horas hábiles.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-background min-h-screen">
@@ -276,12 +307,18 @@ export default function CotizacionPage() {
                   Continuar
                 </button>
               ) : (
-                <button
-                  onClick={() => alert("Solicitud enviada. Nos pondremos en contacto pronto.")}
-                  className="bg-safety-orange text-white font-mono font-bold px-8 py-3 hover:brightness-110 transition-colors text-technical"
-                >
-                  Enviar Solicitud
-                </button>
+                <div className="flex flex-col items-end gap-3">
+                  {status === "error" && (
+                    <p className="text-safety-orange font-mono text-technical">Error al enviar. Intente nuevamente.</p>
+                  )}
+                  <button
+                    onClick={handleSubmit}
+                    disabled={status === "sending"}
+                    className="bg-safety-orange text-white font-mono font-bold px-8 py-3 hover:brightness-110 transition-colors text-technical disabled:opacity-50"
+                  >
+                    {status === "sending" ? "Enviando..." : "Enviar Solicitud"}
+                  </button>
+                </div>
               )}
             </div>
           </div>

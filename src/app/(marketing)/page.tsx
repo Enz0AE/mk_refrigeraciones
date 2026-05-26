@@ -1,8 +1,48 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title: "MK Refrigeraciones — Expertos en Frío Industrial en Misiones",
+  description:
+    "Diseño, montaje y mantenimiento de cámaras frigoríficas, contenedores reefer y equipos de frío industrial. 20 años de trayectoria en Garupá, Misiones.",
+  openGraph: {
+    title: "MK Refrigeraciones — Frío Industrial",
+    description:
+      "Soluciones modulares de refrigeración industrial con 20 años de experiencia en la región del NEA.",
+    url: "https://mkrefrigeraciones.com",
+    siteName: "MK Refrigeraciones",
+    locale: "es_AR",
+    type: "website",
+  },
+};
+
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "MK Refrigeraciones",
+    description: "Diseño, montaje y mantenimiento de infraestructuras frigoríficas modulares en Garupá, Misiones.",
+    url: "https://mkrefrigeraciones.com",
+    telephone: "+54 9 376 412-3456",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Garupá",
+      addressRegion: "Misiones",
+      addressCountry: "AR",
+    },
+    foundingDate: "2004",
+    founder: { "@type": "Person", name: "MK Refrigeraciones" },
+    knowsAbout: ["Frío Industrial", "Cámaras Frigoríficas", "Contenedores Reefer", "Mantenimiento de Frío"],
+    areaServed: "Noreste Argentino (NEA)",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="relative w-full min-h-[600px] flex items-center justify-center bg-primary border-b border-outline-variant overflow-hidden">
         <div className="absolute inset-0 z-0 bg-primary opacity-80" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzN-bQppD639mrCGoCsJ5eJDaajpkzxGFHe2VQOjmnzmiZLqMJmMo-SRt5Svn7KncJa0Nrf_YWt8mYYxQReddi5G50vM4PDkGfxNODe8nxI9QpOVg9vI2c8Lgwk9Lfe9fiDEOwGbeKbIEyoeB8Ua5E2zseidzsWyYRMbsj00SySM8xAvB0K8w4McRjMbeGc9Qdyc436uroDLHXdm_9MS6VArFpccolYEdBlAsYidvDNgPfjlEinuR6hagMMvO0XM801YzEDowUVh0')", backgroundSize: "cover", backgroundPosition: "center", backgroundBlendMode: "overlay" }} />
@@ -90,10 +130,12 @@ export default function Home() {
             {/* Card 1 */}
             <div className="group bg-surface-container-lowest border border-outline-variant flex flex-col hover:border-secondary transition-colors">
               <div className="relative h-64 overflow-hidden bg-surface-variant border-b border-outline-variant">
-                <img
+                <Image
                   alt="Cámara frigorífica industrial"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFemx7OsdtB3Bt0WXTExXBp9Nc5WOdvlovAbEVDthmX7i-4EYMMTVBYSp5qlV1QvhH3_ZE9otuOOA0GC4DXmkTs4KBskxKx1p22GFUxMtvoX6TblFK8T1D4bD-3en9CaIibXzmk8agbe8GbMgxTlo3KXz3xoTmKU9Ko__clBvc2SgxwVQaqi6T4uKmyhG9vDPBwI8G1-7Z8a9mFTKNQQz6SxG5anYUMYCmtWqsdwoiKqMxEZvZvwaaNsEGLvOvyriFlQgUqJuUais"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6 flex flex-col flex-1 gap-4">
@@ -116,10 +158,12 @@ export default function Home() {
             {/* Card 2 */}
             <div className="group bg-primary text-on-primary border border-primary-container flex flex-col">
               <div className="relative h-64 overflow-hidden bg-primary-container border-b border-primary-container">
-                <img
+                <Image
                   alt="Contenedor reefer industrial"
-                  className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-luminosity hover:mix-blend-normal"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuApduDDfwVyhhZGREXXuvNkzGaJ2qws8jQMuhLYOha-MIYqZqyCqF7J-Mur_2GCs-llqF1jO35UhrWuXCAI48Ips1IWhn_xrzK7y13rMf2NNv9k6W9E94Hxn4J01Ga8kDkr9BxtPToqszxUk1T3wTTuUgmBN1WlS023B-BMPoe4nI5eZcJHROo5QzBYitWnifFTY9o7Rlp4kKs8F7E1ChLYYgh-KpQs4Mxb9z_LLb_lq57cu8ctYGbgbtD-a6BJBILIiAsbNd7ICis"
+                  fill
+                  className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-luminosity hover:mix-blend-normal"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-4 right-4 bg-safety-orange text-white font-mono text-[10px] px-2 py-1 uppercase tracking-widest font-bold">
                   Alta Demanda
@@ -146,10 +190,12 @@ export default function Home() {
             {/* Card 3 */}
             <div className="group bg-surface-container-lowest border border-outline-variant flex flex-col hover:border-secondary transition-colors">
               <div className="relative h-64 overflow-hidden bg-surface-variant border-b border-outline-variant">
-                <img
+                <Image
                   alt="Exhibidores y bateas refrigeradas"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkkl5F6bQsfdQ6pp5f3i3-txgprRUyapQOLhjEfZOhoCMDt0KX2zJx6_su2wxvJzDer8J9Xm-nwjG_0hxeauhrg2T4Kv1AKRxN0z9jEFx_8owFWJrSqLHS5BnPmi5xP11xO7a4tlfj1S7v3YwdzymQyznl4sp2RY8gT_7vcPrNvfsyBkoTuunDQiJjHEOD8ilyDwUb14m2sq1tk84mV2Np_OjN2niyemn_CgxETuRIQ2eZwuyCPCmvDaXqBr31eIJ995YSF9l-720"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6 flex flex-col flex-1 gap-4">

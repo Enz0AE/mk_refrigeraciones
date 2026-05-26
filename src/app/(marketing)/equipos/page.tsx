@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Equipos Frigoríficos — Contenedores Reefer y Exhibidores | MK Refrigeraciones",
+  description:
+    "Catálogo de equipos de frío industrial: contenedores reefer 10/20/40 ft, exhibidores verticales, bateas carniceras y unidades evaporadoras.",
+  openGraph: {
+    title: "Equipos Frigoríficos Industriales — MK Refrigeraciones",
+    description:
+      "Soluciones modulares, contenedores reefer y sistemas de exhibición comercial para mantener la cadena de frío con precisión técnica.",
+  },
+};
 
 export default function EquiposPage() {
   return (
@@ -55,10 +68,12 @@ export default function EquiposPage() {
                 <p className="text-on-surface-variant max-w-md">M&aacute;xima capacidad para almacenamiento masivo. Ideal para frigor&iacute;ficos y centros log&iacute;sticos.</p>
               </div>
               <div className="relative w-full aspect-video bg-surface-container-low mb-6 overflow-hidden border border-outline-variant">
-                <img
+                <Image
                   alt="Contenedor Reefer 40ft"
-                  className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuApduDDfwVyhhZGREXXuvNkzGaJ2qws8jQMuhLYOha-MIYqZqyCqF7J-Mur_2GCs-llqF1jO35UhrWuXCAI48Ips1IWhn_xrzK7y13rMf2NNv9k6W9E94Hxn4J01Ga8kDkr9BxtPToqszxUk1T3wTTuUgmBN1WlS023B-BMPoe4nI5eZcJHROo5QzBYitWnifFTY9o7Rlp4kKs8F7E1ChLYYgh-KpQs4Mxb9z_LLb_lq57cu8ctYGbgbtD-a6BJBILIiAsbNd7ICis"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="grid grid-cols-3 gap-4 font-mono text-technical border-t border-outline-variant pt-4">
@@ -103,7 +118,7 @@ export default function EquiposPage() {
             {/* Vertical Display */}
             <div className="bg-white border border-outline-variant flex flex-col h-full group hover:shadow-[0_4px_20px_-4px_rgba(10,37,64,0.1)] transition-shadow duration-300">
               <div className="relative w-full h-80 overflow-hidden border-b border-outline-variant bg-surface-variant">
-                <img alt="Exhibidor Vertical" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPr04QuopphuDHaJtJtfMLZJqT8q6MNKsz1Kq92iPyupeeAiwExMd648qNTm6jjHBsJ5pxtDPP9yNltH_RolTb2u7i9WZEnkDLe6dUm0dMzxNtMTpslbJtd9ejb_pR6QkQxEYzHGnh_pKtBf7Fqgx0c3UtYqmsDym-bH_t7SDsTl4YipzmhSSQrJe-rgUkaRD-txVTf_Dd8U7ZnVPdTfZUNTGl1QEJZN4QwI_aTim-WeeC27156tzAc5Y1GzeJaShGhurZ9vhdgaU" />
+                <Image alt="Exhibidor Vertical" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPr04QuopphuDHaJtJtfMLZJqT8q6MNKsz1Kq92iPyupeeAiwExMd648qNTm6jjHBsJ5pxtDPP9yNltH_RolTb2u7i9WZEnkDLe6dUm0dMzxNtMTpslbJtd9ejb_pR6QkQxEYzHGnh_pKtBf7Fqgx0c3UtYqmsDym-bH_t7SDsTl4YipzmhSSQrJe-rgUkaRD-txVTf_Dd8U7ZnVPdTfZUNTGl1QEJZN4QwI_aTim-WeeC27156tzAc5Y1GzeJaShGhurZ9vhdgaU" fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-mono text-[11px] font-bold uppercase border border-outline-variant">L&iacute;nea Supermercado</span>
                 </div>
@@ -121,7 +136,7 @@ export default function EquiposPage() {
             {/* Butcher Display */}
             <div className="bg-white border border-outline-variant flex flex-col h-full group hover:shadow-[0_4px_20px_-4px_rgba(10,37,64,0.1)] transition-shadow duration-300">
               <div className="relative w-full h-80 overflow-hidden border-b border-outline-variant bg-surface-variant">
-                <img alt="Batea Carnicera" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0jCOvPibWbJNBAwJOD2cOETVVHg-tep2KWGk5gPzGJfrTNLdyDpOvaBJD9XJxf3Bzsw3xLwBmhGd1Hvlxu1lOvi_JMNv7GI-Qe1-I5meFxcg7_Y1OMEodw41jvezDvoUwAArPuSFCvjcXlNq6ueXzQkjd1UtoN_lIlUqKwm-zcwNJnM5qXrlTMYFOz6NMfxC1i6k_Q2fZcblHDQAkZz7gbRIoQe2NEzfLgJFZkdU6lsyCFsOl4_zf7Rf_NTDReCci7EszPVu3Nqo" />
+                <Image alt="Batea Carnicera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0jCOvPibWbJNBAwJOD2cOETVVHg-tep2KWGk5gPzGJfrTNLdyDpOvaBJD9XJxf3Bzsw3xLwBmhGd1Hvlxu1lOvi_JMNv7GI-Qe1-I5meFxcg7_Y1OMEodw41jvezDvoUwAArPuSFCvjcXlNq6ueXzQkjd1UtoN_lIlUqKwm-zcwNJnM5qXrlTMYFOz6NMfxC1i6k_Q2fZcblHDQAkZz7gbRIoQe2NEzfLgJFZkdU6lsyCFsOl4_zf7Rf_NTDReCci7EszPVu3Nqo" fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-surface-container-lowest/90 backdrop-blur-sm text-primary-container font-mono text-[11px] font-bold uppercase border border-outline-variant">L&iacute;nea Carnicer&iacute;a</span>
                 </div>
@@ -148,7 +163,7 @@ export default function EquiposPage() {
             <h2 className="font-heading text-headline-lg text-primary-container mb-6">Unidades Evaporadoras</h2>
             <p className="font-body text-body-md text-on-surface-variant mb-8 max-w-lg">Sistemas de intercambio t&eacute;rmico de alta eficiencia para c&aacute;maras frigor&iacute;ficas industriales.</p>
             <div className="relative w-full aspect-video mb-8 border border-outline-variant">
-              <img alt="Unidad Evaporadora Industrial" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1whkSeMMZ0LBqwSl7d5ZCC-Y3WCMUKA1zRng1EVqqnXq5K_cfUXTtlfjdaFJdGJW_jOKbij_iQZfbn6miIVwgLshxAhXB820D2JkjEmABfAEB6OBBmYJwRHl6GGf3Cdl1JKWr8wwraICaJwSjEwMOyQqwtvNFMB51zRrf6_L1HDH6MyNmb6CoUY1nr4QREgY2Cs9_ogDyptXu7zCkigWTXHaKPtJlr4Noch1_bU5G_SufvaQMTje3kcZV8hkbHSw9o-MQXBsyCDw" />
+              <Image alt="Unidad Evaporadora Industrial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1whkSeMMZ0LBqwSl7d5ZCC-Y3WCMUKA1zRng1EVqqnXq5K_cfUXTtlfjdaFJdGJW_jOKbij_iQZfbn6miIVwgLshxAhXB820D2JkjEmABfAEB6OBBmYJwRHl6GGf3Cdl1JKWr8wwraICaJwSjEwMOyQqwtvNFMB51zRrf6_L1HDH6MyNmb6CoUY1nr4QREgY2Cs9_ogDyptXu7zCkigWTXHaKPtJlr4Noch1_bU5G_SufvaQMTje3kcZV8hkbHSw9o-MQXBsyCDw" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono text-sm">
               <div className="border-l-2 border-surface-variant pl-4">

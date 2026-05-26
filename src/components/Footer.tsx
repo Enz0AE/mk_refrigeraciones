@@ -9,7 +9,7 @@ export default function Footer() {
             MK REFRIGERACIONES
           </div>
           <p className="font-mono text-label-sm text-on-primary opacity-70 mt-auto pt-8">
-            &copy; 2024 MK Refrigeraciones. Ruta 12, Garup&aacute;, Misiones. Excelencia en Fr&iacute;o Industrial.
+            &copy; {new Date().getFullYear()} MK Refrigeraciones. Ruta 12, Garup&aacute;, Misiones. Excelencia en Fr&iacute;o Industrial.
           </p>
         </div>
         <div className="md:col-span-1 flex flex-col gap-4">
