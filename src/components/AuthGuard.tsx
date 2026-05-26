@@ -12,10 +12,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const isLoginPage = pathname?.endsWith("/login");
 
   useEffect(() => {
-    if (isLoginPage) {
-      setLoading(false);
-      return;
-    }
+    if (isLoginPage) return;
 
     const supabase = createClient();
 
@@ -28,7 +25,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     });
   }, [router, isLoginPage]);
 
-  if (loading) {
+  if (loading && !isLoginPage) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#F8FAFC]">
         <div className="flex flex-col items-center gap-4">

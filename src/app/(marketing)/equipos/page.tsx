@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Equipos Frigoríficos — Contenedores Reefer y Exhibidores | MK Refrigeraciones",
   description:
-    "Catálogo de equipos de frío industrial: contenedores reefer 10/20/40 ft, exhibidores verticales, bateas carniceras y unidades evaporadoras.",
+    "Catálogo de equipos de frío industrial: contenedores reefer 3/6/12 m, exhibidores verticales, bateas carniceras y unidades evaporadoras.",
   openGraph: {
     title: "Equipos Frigoríficos Industriales — MK Refrigeraciones",
     description:
@@ -56,7 +56,7 @@ export default function EquiposPage() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <h2 className="font-heading text-headline-lg text-primary-container mb-2">Contenedores Reefer</h2>
-              <p className="font-body text-body-md text-on-surface-variant">Soluciones modulares port&aacute;tiles (10, 20 y 40 ft).</p>
+              <p className="font-body text-body-md text-on-surface-variant">Soluciones modulares port&aacute;tiles (3, 6 y 12 m).</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter-md">
@@ -64,12 +64,12 @@ export default function EquiposPage() {
             <div className="md:col-span-8 bg-white border border-outline-variant p-6 flex flex-col justify-between">
               <div className="mb-6">
                 <span className="inline-block px-3 py-1 bg-[#e0f2fe] text-[#0369a1] font-mono text-[12px] font-bold mb-4">ALTA DEMANDA</span>
-                <h3 className="font-heading text-[28px] leading-8 text-primary-container mb-2">Contenedor 40 FT High Cube</h3>
+                <h3 className="font-heading text-[28px] leading-8 text-primary-container mb-2">Contenedor 12,2 m High Cube</h3>
                 <p className="text-on-surface-variant max-w-md">M&aacute;xima capacidad para almacenamiento masivo. Ideal para frigor&iacute;ficos y centros log&iacute;sticos.</p>
               </div>
               <div className="relative w-full aspect-video bg-surface-container-low mb-6 overflow-hidden border border-outline-variant">
                 <Image
-                  alt="Contenedor Reefer 40ft"
+                  alt="Contenedor Reefer 12,2 m"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuApduDDfwVyhhZGREXXuvNkzGaJ2qws8jQMuhLYOha-MIYqZqyCqF7J-Mur_2GCs-llqF1jO35UhrWuXCAI48Ips1IWhn_xrzK7y13rMf2NNv9k6W9E94Hxn4J01Ga8kDkr9BxtPToqszxUk1T3wTTuUgmBN1WlS023B-BMPoe4nI5eZcJHROo5QzBYitWnifFTY9o7Rlp4kKs8F7E1ChLYYgh-KpQs4Mxb9z_LLb_lq57cu8ctYGbgbtD-a6BJBILIiAsbNd7ICis"
                   fill
                   className="object-cover"
@@ -85,22 +85,22 @@ export default function EquiposPage() {
             {/* 20ft & 10ft */}
             <div className="md:col-span-4 flex flex-col gap-gutter-md">
               <div className="bg-white border border-outline-variant p-6 flex-1 flex flex-col">
-                <h4 className="font-heading text-[20px] leading-6 text-primary-container mb-2">Modelo 20 FT</h4>
+                <h4 className="font-heading text-[20px] leading-6 text-primary-container mb-2">Modelo 6,1 m</h4>
                 <p className="text-on-surface-variant text-sm mb-4 flex-1">Soluci&oacute;n vers&aacute;til para espacios intermedios y locales comerciales.</p>
                 <ul className="font-mono text-[13px] space-y-2 mb-4 text-primary-container">
                   <li className="flex justify-between border-b border-surface-variant pb-1"><span>Volumen:</span> <span className="font-bold">28.3 m&sup3;</span></li>
                   <li className="flex justify-between border-b border-surface-variant pb-1"><span>Largo ext:</span> <span className="font-bold">6.06 m</span></li>
                 </ul>
-                <button className="w-full py-2 border border-primary-container text-primary-container font-mono text-[13px] font-bold hover:bg-surface-variant transition-colors uppercase">Ficha T&eacute;cnica</button>
+                <Link href="/cotizacion" className="block w-full py-2 border border-primary-container text-primary-container font-mono text-[13px] font-bold hover:bg-surface-variant transition-colors uppercase text-center">Ficha T&eacute;cnica</Link>
               </div>
               <div className="bg-white border border-outline-variant p-6 flex-1 flex flex-col">
-                <h4 className="font-heading text-[20px] leading-6 text-primary-container mb-2">Modelo 10 FT</h4>
+                <h4 className="font-heading text-[20px] leading-6 text-primary-container mb-2">Modelo 3,0 m</h4>
                 <p className="text-on-surface-variant text-sm mb-4 flex-1">Ultra compacto. Perfecto para eventos o expansiones r&aacute;pidas.</p>
                 <ul className="font-mono text-[13px] space-y-2 mb-4 text-primary-container">
                   <li className="flex justify-between border-b border-surface-variant pb-1"><span>Volumen:</span> <span className="font-bold">14.1 m&sup3;</span></li>
                   <li className="flex justify-between border-b border-surface-variant pb-1"><span>Largo ext:</span> <span className="font-bold">2.99 m</span></li>
                 </ul>
-                <button className="w-full py-2 border border-primary-container text-primary-container font-mono text-[13px] font-bold hover:bg-surface-variant transition-colors uppercase">Ficha T&eacute;cnica</button>
+                <Link href="/cotizacion" className="block w-full py-2 border border-primary-container text-primary-container font-mono text-[13px] font-bold hover:bg-surface-variant transition-colors uppercase text-center">Ficha T&eacute;cnica</Link>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function EquiposPage() {
                   <div className="flex items-center gap-2"><span className="material-symbols-outlined text-[18px]">ac_unit</span> <span>Temp: 2&deg;C a 8&deg;C</span></div>
                   <div className="flex items-center gap-2"><span className="material-symbols-outlined text-[18px]">straighten</span> <span>Modulos desde 1.25m a 3.75m</span></div>
                 </div>
-                <button className="w-full py-3 bg-primary text-white font-mono font-bold hover:bg-primary-container transition-colors uppercase text-technical">Cotizar M&oacute;dulos</button>
+                <Link href="/cotizacion" className="block w-full py-3 bg-primary text-white font-mono font-bold hover:bg-primary-container transition-colors uppercase text-technical text-center">Cotizar M&oacute;dulos</Link>
               </div>
             </div>
             {/* Butcher Display */}
@@ -148,7 +148,7 @@ export default function EquiposPage() {
                   <div className="flex items-center gap-2"><span className="material-symbols-outlined text-[18px]">ac_unit</span> <span>Temp: 0&deg;C a 5&deg;C</span></div>
                   <div className="flex items-center gap-2"><span className="material-symbols-outlined text-[18px]">straighten</span> <span>Profundidad de exhibici&oacute;n: 900mm</span></div>
                 </div>
-                <button className="w-full py-3 bg-primary text-white font-mono font-bold hover:bg-primary-container transition-colors uppercase text-technical">Cotizar Batea</button>
+                <Link href="/cotizacion" className="block w-full py-3 bg-primary text-white font-mono font-bold hover:bg-primary-container transition-colors uppercase text-technical text-center">Cotizar Batea</Link>
               </div>
             </div>
           </div>
@@ -216,9 +216,9 @@ export default function EquiposPage() {
                   </div>
                 </div>
               </div>
-              <button className="mt-10 w-full py-4 bg-safety-orange text-white font-mono font-bold hover:brightness-110 transition-colors uppercase tracking-wider text-technical">
+              <Link href="/contacto" className="mt-10 w-full py-4 bg-safety-orange text-white font-mono font-bold hover:brightness-110 transition-colors uppercase tracking-wider text-technical block text-center">
                 Consultar Opciones
-              </button>
+              </Link>
             </div>
           </div>
         </div>

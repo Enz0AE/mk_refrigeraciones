@@ -4,18 +4,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: string;
-  date: string;
-  read_time: string;
-  image: string;
-}
-
 export async function generateStaticParams() {
   const supabase = createAdminClient();
   const { data } = await supabase.from("blog_posts").select("slug").eq("published", true);

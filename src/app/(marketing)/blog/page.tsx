@@ -21,8 +21,6 @@ const categories = ["Todos", "Mantenimiento", "Comparativas", "Eficiencia", "Nor
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     document.title = "Blog Técnico — Frío Industrial y Mantenimiento | MK Refrigeraciones";
   }, []);
@@ -36,7 +34,6 @@ export default function BlogPage() {
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         if (data) setPosts(data as BlogPost[]);
-        setLoading(false);
       });
   }, []);
 

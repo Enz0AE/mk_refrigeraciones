@@ -11,7 +11,7 @@ const steps = [
 
 const serviceOptions = [
   { value: "instalacion", label: "Instalación Frigorífica", desc: "Cámaras de frío, túneles de congelado" },
-  { value: "contenedor", label: "Contenedor Reefer", desc: "Alquiler o compra de contenedores 10/20/40 ft" },
+  { value: "contenedor", label: "Contenedor Reefer", desc: "Alquiler o compra de contenedores 3/6/12 m" },
   { value: "exhibidor", label: "Exhibidor / Batea", desc: "Equipos comerciales para supermercados" },
   { value: "mantenimiento", label: "Mantenimiento", desc: "Servicio preventivo o correctivo" },
   { value: "otro", label: "Otro", desc: "Consulta personalizada" },

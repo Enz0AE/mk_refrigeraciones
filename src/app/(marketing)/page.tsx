@@ -173,7 +173,7 @@ export default function Home() {
                 <div className="absolute top-0 left-0 w-1 h-full bg-secondary-fixed-dim" />
                 <h3 className="font-heading text-headline-mobile text-white pl-2">Contenedores Reefer</h3>
                 <div className="text-technical font-mono text-surface-variant grid grid-cols-2 gap-2 bg-primary-container p-4 border border-outline-variant/20 ml-2">
-                  <div><span className="block text-on-primary-container text-xs uppercase mb-1">Formatos</span>20ft / 40ft</div>
+                  <div><span className="block text-on-primary-container text-xs uppercase mb-1">Formatos</span>6,1m / 12,2m</div>
                   <div><span className="block text-on-primary-container text-xs uppercase mb-1">Uso</span>Port&aacute;til/Fijo</div>
                 </div>
                 <p className="font-body text-body-md text-surface-variant mt-2 flex-1 pl-2">
