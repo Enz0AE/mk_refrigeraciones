@@ -1,12 +1,13 @@
 -- ============================================================
 -- MK Refrigeraciones — Supabase Schema
+-- Idempotent: safe to run multiple times
 -- Ejecutar en: Supabase Dashboard → SQL Editor
 -- ============================================================
 
 -- 1. TABLAS
 -- ------------------------------------------------
 
-CREATE TABLE blog_posts (
+CREATE TABLE IF NOT EXISTS blog_posts (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   slug TEXT UNIQUE NOT NULL,
   title TEXT NOT NULL,
@@ -21,12 +22,12 @@ CREATE TABLE blog_posts (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE equipos (
+CREATE TABLE IF NOT EXISTS equipos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   tipo TEXT NOT NULL,
   nombre TEXT NOT NULL,
   descripcion TEXT,
-  especificaciones JSONB DEFAULT '{}',
+  especificaciones JSONB DEFAULT '[]',
   imagen TEXT,
   publicado BOOLEAN DEFAULT true,
   orden INTEGER DEFAULT 0,
@@ -34,7 +35,7 @@ CREATE TABLE equipos (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE servicios (
+CREATE TABLE IF NOT EXISTS servicios (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   titulo TEXT NOT NULL,
   descripcion TEXT,
@@ -46,7 +47,7 @@ CREATE TABLE servicios (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE cotizaciones (
+CREATE TABLE IF NOT EXISTS cotizaciones (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   service TEXT,
   temp TEXT,
@@ -61,7 +62,7 @@ CREATE TABLE cotizaciones (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE contactos (
+CREATE TABLE IF NOT EXISTS contactos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   email TEXT NOT NULL,
@@ -72,7 +73,7 @@ CREATE TABLE contactos (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
-CREATE TABLE instalaciones (
+CREATE TABLE IF NOT EXISTS instalaciones (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   email TEXT NOT NULL,
@@ -87,10 +88,11 @@ CREATE TABLE instalaciones (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- 2. SEED DATA
+-- 2. SEED DATA (only if blog_posts is empty)
 -- ------------------------------------------------
 
-INSERT INTO blog_posts (slug, title, excerpt, content, category, date, read_time, image) VALUES
+INSERT INTO blog_posts (slug, title, excerpt, content, category, date, read_time, image)
+SELECT * FROM (VALUES
 (
   'mantenimiento-camaras-frigorificas',
   'Guía de Mantenimiento para Cámaras Frigoríficas Industriales',
@@ -130,7 +132,9 @@ INSERT INTO blog_posts (slug, title, excerpt, content, category, date, read_time
   '5 Abril, 2024',
   '8 min',
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBzN-bQppD639mrCGoCsJ5eJDaajpkzxGFHe2VQOjmnzmiZLqMJmMo-SRt5Svn7KncJa0Nrf_YWt8mYYxQReddi5G50vM4PDkGfxNODe8nxI9QpOVg9vI2c8Lgwk9Lfe9fiDEOwGbeKbIEyoeB8Ua5E2zseidzsWyYRMbsj00SySM8xAvB0K8w4McRjMbeGc9Qdyc436uroDLHXdm_9MS6VArFpccolYEdBlAsYidvDNgPfjlEinuR6hagMMvO0XM801YzEDowUVh0'
-);
+)
+) AS v(slug, title, excerpt, content, category, date, read_time, image)
+WHERE NOT EXISTS (SELECT 1 FROM blog_posts LIMIT 1);
 
 -- 3. ROW LEVEL SECURITY
 -- ------------------------------------------------
@@ -142,23 +146,26 @@ ALTER TABLE cotizaciones ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contactos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE instalaciones ENABLE ROW LEVEL SECURITY;
 
--- Public read for published content
-CREATE POLICY "Public blog read" ON blog_posts FOR SELECT USING (published = true);
-CREATE POLICY "Public equipos read" ON equipos FOR SELECT USING (publicado = true);
-CREATE POLICY "Public servicios read" ON servicios FOR SELECT USING (publicado = true);
+DO $$
+BEGIN
+  -- Public read for published content
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='blog_posts'    AND policyname='Public blog read')     THEN CREATE POLICY "Public blog read"     ON blog_posts FOR SELECT USING (published = true);     END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='equipos'       AND policyname='Public equipos read')   THEN CREATE POLICY "Public equipos read"   ON equipos FOR SELECT USING (publicado = true);   END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='servicios'     AND policyname='Public servicios read') THEN CREATE POLICY "Public servicios read" ON servicios FOR SELECT USING (publicado = true); END IF;
 
--- Public insert for form submissions (no auth needed)
-CREATE POLICY "Public insert cotizaciones" ON cotizaciones FOR INSERT WITH CHECK (true);
-CREATE POLICY "Public insert contactos" ON contactos FOR INSERT WITH CHECK (true);
-CREATE POLICY "Public insert instalaciones" ON instalaciones FOR INSERT WITH CHECK (true);
+  -- Public insert for form submissions
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='cotizaciones'  AND policyname='Public insert cotizaciones')  THEN CREATE POLICY "Public insert cotizaciones"  ON cotizaciones FOR INSERT WITH CHECK (true);  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='contactos'     AND policyname='Public insert contactos')     THEN CREATE POLICY "Public insert contactos"     ON contactos FOR INSERT WITH CHECK (true);     END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='instalaciones' AND policyname='Public insert instalaciones') THEN CREATE POLICY "Public insert instalaciones" ON instalaciones FOR INSERT WITH CHECK (true); END IF;
 
--- Authenticated users can do everything
-CREATE POLICY "Auth full access blog" ON blog_posts FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
-CREATE POLICY "Auth full access equipos" ON equipos FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
-CREATE POLICY "Auth full access servicios" ON servicios FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
-CREATE POLICY "Auth full access cotizaciones" ON cotizaciones FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
-CREATE POLICY "Auth full access contactos" ON contactos FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
-CREATE POLICY "Auth full access instalaciones" ON instalaciones FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');
+  -- Authenticated users can do everything
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='blog_posts'    AND policyname='Auth full access blog')         THEN CREATE POLICY "Auth full access blog"         ON blog_posts FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');         END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='equipos'       AND policyname='Auth full access equipos')       THEN CREATE POLICY "Auth full access equipos"       ON equipos FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');       END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='servicios'     AND policyname='Auth full access servicios')     THEN CREATE POLICY "Auth full access servicios"     ON servicios FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');     END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='cotizaciones'  AND policyname='Auth full access cotizaciones')  THEN CREATE POLICY "Auth full access cotizaciones"  ON cotizaciones FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='contactos'     AND policyname='Auth full access contactos')     THEN CREATE POLICY "Auth full access contactos"     ON contactos FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated');     END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='instalaciones' AND policyname='Auth full access instalaciones') THEN CREATE POLICY "Auth full access instalaciones" ON instalaciones FOR ALL USING (auth.role() = 'authenticated') WITH CHECK (auth.role() = 'authenticated'); END IF;
+END $$;
 
 -- 4. STORAGE BUCKET
 -- ------------------------------------------------
@@ -166,7 +173,18 @@ CREATE POLICY "Auth full access instalaciones" ON instalaciones FOR ALL USING (a
 INSERT INTO storage.buckets (id, name, public) VALUES ('images', 'images', true)
 ON CONFLICT (id) DO NOTHING;
 
-CREATE POLICY "Public read images" ON storage.objects FOR SELECT USING (bucket_id = 'images');
-CREATE POLICY "Auth upload images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'images' AND auth.role() = 'authenticated');
-CREATE POLICY "Auth update images" ON storage.objects FOR UPDATE USING (bucket_id = 'images' AND auth.role() = 'authenticated');
-CREATE POLICY "Auth delete images" ON storage.objects FOR DELETE USING (bucket_id = 'images' AND auth.role() = 'authenticated');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='storage' AND tablename='objects' AND policyname='Public read images')
+    THEN CREATE POLICY "Public read images" ON storage.objects FOR SELECT USING (bucket_id = 'images');
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='storage' AND tablename='objects' AND policyname='Auth upload images')
+    THEN CREATE POLICY "Auth upload images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'images' AND auth.role() = 'authenticated');
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='storage' AND tablename='objects' AND policyname='Auth update images')
+    THEN CREATE POLICY "Auth update images" ON storage.objects FOR UPDATE USING (bucket_id = 'images' AND auth.role() = 'authenticated');
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname='storage' AND tablename='objects' AND policyname='Auth delete images')
+    THEN CREATE POLICY "Auth delete images" ON storage.objects FOR DELETE USING (bucket_id = 'images' AND auth.role() = 'authenticated');
+  END IF;
+END $$;
