@@ -144,7 +144,7 @@ SELECT * FROM (VALUES
     'Contenedor 12,2 m High Cube',
     'Máxima capacidad para almacenamiento masivo. Ideal para frigoríficos y centros logísticos.',
     '[{"clave":"Volumen","valor":"67.5 m³"},{"clave":"Rango Temp","valor":"-25°C a +25°C"},{"clave":"Consumo","valor":"12 kW/h max"}]'::jsonb,
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuApduDDfwVyhhZGREXXuvNkzGaJ2qws8jQMuhLYOha-MIYqZqyCqF7J-Mur_2GCs-llqF1jO35UhrWuXCAI48Ips1IWhn_xrzK7y13rMf2NNv9k6W9E94Hxn4J01Ga8kDkr9BxtPToqszxUk1T3wTTuUgmBN1WlS023B-BMPoe4nI5eZcJHROo5QzBYitWnifFTY9o7Rlp4kKs8F7E1ChLYYgh-KpQs4Mxb9z_LLb_lq57cu8ctYGbgbtD-a6BJBILIiAsbNd7ICis',
+    NULL,
     true,
     0
   ),
@@ -171,7 +171,7 @@ SELECT * FROM (VALUES
     'Exhibidores Verticales de Lácteos',
     'Cortinas de aire optimizadas para reducir la pérdida de frío. Iluminación LED integrada de alta fidelidad cromática.',
     '[{"clave":"Temp","valor":"2°C a 8°C"},{"clave":"Módulos","valor":"Desde 1.25m a 3.75m"}]'::jsonb,
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuDPr04QuopphuDHaJtJtfMLZJqT8q6MNKsz1Kq92iPyupeeAiwExMd648qNTm6jjHBsJ5pxtDPP9yNltH_RolTb2u7i9WZEnkDLe6dUm0dMzxNtMTpslbJtd9ejb_pR6QkQxEYzHGnh_pKtBf7Fqgx0c3UtYqmsDym-bH_t7SDsTl4YipzmhSSQrJe-rgUkaRD-txVTf_Dd8U7ZnVPdTfZUNTGl1QEJZN4QwI_aTim-WeeC27156tzAc5Y1GzeJaShGhurZ9vhdgaU',
+    NULL,
     true,
     3
   ),
@@ -180,7 +180,7 @@ SELECT * FROM (VALUES
     'Bateas Carniceras Inox',
     'Interior en acero inoxidable AISI 304. Sistema de frío estático o forzado según requerimiento del cliente.',
     '[{"clave":"Temp","valor":"0°C a 5°C"},{"clave":"Profundidad","valor":"900mm"}]'::jsonb,
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuC0jCOvPibWbJNBAwJOD2cOETVVHg-tep2KWGk5gPzGJfrTNLdyDpOvaBJD9XJxf3Bzsw3xLwBmhGd1Hvlxu1lOvi_JMNv7GI-Qe1-I5meFxcg7_Y1OMEodw41jvezDvoUwAArPuSFCvjcXlNq6ueXzQkjd1UtoN_lIlUqKwm-zcwNJnM5qXrlTMYFOz6NMfxC1i6k_Q2fZcblHDQAkZz7gbRIoQe2NEzfLgJFZkdU6lsyCFsOl4_zf7Rf_NTDReCci7EszPVu3Nqo',
+    NULL,
     true,
     4
   ),
@@ -189,7 +189,7 @@ SELECT * FROM (VALUES
     'Unidades Evaporadoras',
     'Sistemas de intercambio térmico de alta eficiencia para cámaras frigoríficas industriales.',
     '[{"clave":"Capacidad Frigorífica","valor":"Desde 2.5 kW hasta 80 kW"},{"clave":"Paso de Aleta","valor":"4.5mm / 6.0mm / 9.0mm"},{"clave":"Descongelamiento","valor":"Eléctrico / Gas Caliente"},{"clave":"Carcasa","valor":"Aluminio Magnesio Pinta blanca"}]'::jsonb,
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuB1whkSeMMZ0LBqwSl7d5ZCC-Y3WCMUKA1zRng1EVqqnXq5K_cfUXTtlfjdaFJdGJW_jOKbij_iQZfbn6miIVwgLshxAhXB820D2JkjEmABfAEB6OBBmYJwRHl6GGf3Cdl1JKWr8wwraICaJwSjEwMOyQqwtvNFMB51zRrf6_L1HDH6MyNmb6CoUY1nr4QREgY2Cs9_ogDyptXu7zCkigWTXHaKPtJlr4Noch1_bU5G_SufvaQMTje3kcZV8hkbHSw9o-MQXBsyCDw',
+    NULL,
     true,
     5
   )

@@ -29,9 +29,9 @@ const TABS: { key: TabType; label: string }[] = [
 const STATUS_STYLES: Record<string, string> = {
   pendiente:
     "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]",
-  contactado:
+  contacto:
     "bg-[#DBEAFE] text-[#1E40AF] border-[#93C5FD]",
-  finalizado:
+  confirmado:
     "bg-[#DCFCE7] text-[#166534] border-[#86EFAC]",
 };
 

@@ -44,12 +44,12 @@ const FIELDS: Record<SubmissionType, { key: string; label: string }[]> = {
   ],
 };
 
-const STATUS_OPTIONS = ["pendiente", "contactado", "finalizado"];
+const STATUS_OPTIONS = ["pendiente", "contacto", "confirmado"];
 
 const STATUS_STYLES: Record<string, string> = {
   pendiente: "bg-[#FEF3C7] text-[#92400E] border-[#FCD34D]",
-  contactado: "bg-[#DBEAFE] text-[#1E40AF] border-[#93C5FD]",
-  finalizado: "bg-[#DCFCE7] text-[#166534] border-[#86EFAC]",
+  contacto: "bg-[#DBEAFE] text-[#1E40AF] border-[#93C5FD]",
+  confirmado: "bg-[#DCFCE7] text-[#166534] border-[#86EFAC]",
 };
 
 function getStatusColor(status: string): string {

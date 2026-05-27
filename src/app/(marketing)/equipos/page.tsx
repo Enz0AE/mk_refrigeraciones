@@ -139,7 +139,7 @@ export default async function EquiposPage() {
                     key={eq.id}
                     className="bg-white border border-outline-variant flex flex-col h-full group hover:shadow-[0_4px_20px_-4px_rgba(10,37,64,0.1)] transition-shadow duration-300"
                   >
-                    {eq.imagen && (
+                    {eq.imagen ? (
                       <div className="relative w-full h-64 overflow-hidden border-b border-outline-variant bg-surface-variant">
                         <Image
                           alt={eq.nombre}
@@ -148,6 +148,10 @@ export default async function EquiposPage() {
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
+                      </div>
+                    ) : (
+                      <div className="relative w-full h-64 overflow-hidden border-b border-outline-variant bg-surface-container-low flex items-center justify-center">
+                        <span className="material-symbols-outlined text-[64px] text-outline">ac_unit</span>
                       </div>
                     )}
                     <div className="p-6 flex flex-col flex-1">
