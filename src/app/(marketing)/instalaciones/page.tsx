@@ -5,7 +5,7 @@ import { useState, FormEvent, useEffect } from "react";
 
 export default function InstalacionesPage() {
   useEffect(() => {
-    document.title = "Instalaciones Frigoríficas — Cámaras de Frío Industrial | MK Refrigeraciones";
+    document.title = "Instalaciones Frigoríficas — Cámaras de Frío Industrial | Refrigeraciones MK";
   }, []);
   return (
     <>

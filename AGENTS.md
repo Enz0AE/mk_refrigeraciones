@@ -1,4 +1,4 @@
-# MK Refrigeraciones — Project Tracker
+# Refrigeraciones MK — Project Tracker
 
 ## Stack
 - **Framework:** Next.js 16.2.6 (App Router) + React 19.2

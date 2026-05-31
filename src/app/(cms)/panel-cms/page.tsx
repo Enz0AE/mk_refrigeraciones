@@ -113,7 +113,7 @@ export default function PanelCMSPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-heading text-headline-lg text-primary">Panel de Gestión</h1>
-          <p className="font-mono text-technical text-on-surface-variant">MK Refrigeraciones — CMS</p>
+          <p className="font-mono text-technical text-on-surface-variant">Refrigeraciones MK — CMS</p>
         </div>
         <button
           onClick={async () => {

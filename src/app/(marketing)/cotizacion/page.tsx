@@ -19,7 +19,7 @@ const serviceOptions = [
 
 export default function CotizacionPage() {
   useEffect(() => {
-    document.title = "Solicitar Presupuesto — MK Refrigeraciones | Cotización Frío Industrial";
+    document.title = "Solicitar Presupuesto — Refrigeraciones MK | Cotización Frío Industrial";
   }, []);
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");

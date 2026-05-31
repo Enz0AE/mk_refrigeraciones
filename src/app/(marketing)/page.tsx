@@ -3,15 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "MK Refrigeraciones — Expertos en Frío Industrial en Misiones",
+  title: "Refrigeraciones MK — Expertos en Frío Industrial en Misiones",
   description:
     "Diseño, montaje y mantenimiento de cámaras frigoríficas, contenedores reefer y equipos de frío industrial. 20 años de trayectoria en Garupá, Misiones.",
   openGraph: {
-    title: "MK Refrigeraciones — Frío Industrial",
+    title: "Refrigeraciones MK — Frío Industrial",
     description:
       "Soluciones modulares de refrigeración industrial con 20 años de experiencia en la región del NEA.",
     url: "https://mkrefrigeraciones.com",
-    siteName: "MK Refrigeraciones",
+    siteName: "Refrigeraciones MK",
     locale: "es_AR",
     type: "website",
   },
@@ -21,7 +21,7 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "MK Refrigeraciones",
+    name: "Refrigeraciones MK",
     description: "Diseño, montaje y mantenimiento de infraestructuras frigoríficas modulares en Garupá, Misiones.",
     url: "https://mkrefrigeraciones.com",
     telephone: process.env.NEXT_PUBLIC_PHONE_SALES || "+54 9 376 412-3456",
@@ -32,7 +32,7 @@ export default function Home() {
       addressCountry: "AR",
     },
     foundingDate: "2004",
-    founder: { "@type": "Person", name: "MK Refrigeraciones" },
+    founder: { "@type": "Person", name: "Refrigeraciones MK" },
     knowsAbout: ["Frío Industrial", "Cámaras Frigoríficas", "Contenedores Reefer", "Mantenimiento de Frío"],
     areaServed: "Noreste Argentino (NEA)",
   };
@@ -48,6 +48,14 @@ export default function Home() {
         <div className="absolute inset-0 z-0 bg-primary opacity-80" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzN-bQppD639mrCGoCsJ5eJDaajpkzxGFHe2VQOjmnzmiZLqMJmMo-SRt5Svn7KncJa0Nrf_YWt8mYYxQReddi5G50vM4PDkGfxNODe8nxI9QpOVg9vI2c8Lgwk9Lfe9fiDEOwGbeKbIEyoeB8Ua5E2zseidzsWyYRMbsj00SySM8xAvB0K8w4McRjMbeGc9Qdyc436uroDLHXdm_9MS6VArFpccolYEdBlAsYidvDNgPfjlEinuR6hagMMvO0XM801YzEDowUVh0')", backgroundSize: "cover", backgroundPosition: "center", backgroundBlendMode: "overlay" }} />
         <div className="relative z-10 max-w-[1280px] mx-auto px-margin-edge w-full grid grid-cols-1 md:grid-cols-12 gap-gutter-md py-section-gap">
           <div className="md:col-span-8 flex flex-col items-start gap-8">
+            <Image
+              src="/Logo transparente refrigeracionesmk.svg"
+              alt="Refrigeraciones MK"
+              width={80}
+              height={80}
+              className="shrink-0"
+              priority
+            />
             <div className="inline-flex items-center gap-2 bg-primary-container border border-outline-variant px-4 py-2">
               <span className="w-2 h-2 bg-secondary-fixed-dim rounded-full animate-pulse" />
               <span className="font-mono text-label-sm text-secondary-fixed-dim uppercase tracking-wider">
@@ -256,7 +264,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-primary/40 mix-blend-multiply" />
               <div className="bg-white p-4 shadow-[4px_4px_0px_0px_rgba(10,37,64,0.3)] border border-outline-variant relative z-10 flex items-center gap-3">
                 <span className="material-symbols-outlined text-safety-orange">warehouse</span>
-                <span className="font-mono text-technical font-bold text-primary">Planta MK</span>
+                <span className="font-mono text-technical font-bold text-primary">Planta Refrigeraciones MK</span>
               </div>
             </div>
           </div>

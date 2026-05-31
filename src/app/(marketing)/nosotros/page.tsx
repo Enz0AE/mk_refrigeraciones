@@ -3,23 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Sobre Nosotros — MK Refrigeraciones | 20 Años de Trayectoria",
+  title: "Sobre Nosotros — Refrigeraciones MK | 22 Años de Trayectoria",
   description:
-    "Conozca la historia de MK Refrigeraciones: fundada en 2004 en Garupá, Misiones. Más de 500 proyectos ejecutados en frío industrial en la región del NEA.",
+    "Conozca la historia de Refrigeraciones MK: fundada en 2004 en Garupá, Misiones. Más de 500 proyectos ejecutados en frío industrial en la región del NEA.",
   openGraph: {
-    title: "Sobre MK Refrigeraciones — Trayectoria en Frío Industrial",
+    title: "Sobre Refrigeraciones MK — Trayectoria en Frío Industrial",
     description:
       "20 años de experiencia en instalaciones frigoríficas, contenedores reefer y equipamiento comercial para la cadena de frío.",
   },
 };
 
 const timeline = [
-  { year: "2004", event: "Fundación de MK Refrigeraciones en Garupá, Misiones" },
+  { year: "2004", event: "Fundación de Refrigeraciones MK en Garupá, Misiones" },
   { year: "2008", event: "Primera instalación industrial de gran escala" },
   { year: "2012", event: "Incorporación de línea de contenedores reefer" },
   { year: "2016", event: "Expansión a toda la región del NEA" },
   { year: "2020", event: "Certificación en sistemas de frío industrial" },
-  { year: "2024", event: "20 años de trayectoria — Más de 500 proyectos ejecutados" },
+  { year: "2026", event: "22 años de trayectoria — Más de 500 proyectos ejecutados" },
 ];
 
 const values = [
@@ -48,7 +48,7 @@ export default function NosotrosPage() {
             <div>
               <h2 className="font-heading text-headline-lg text-primary mb-6">Nuestra Historia</h2>
               <p className="font-body text-body-md text-on-surface-variant mb-4">
-                Fundada en 2004 en Garupá, Misiones, MK Refrigeraciones nació con la visión de proveer soluciones de frío industrial de alta calidad a la región del Noreste Argentino.
+                Fundada en 2004 en Garupá, Misiones, Refrigeraciones MK nació con la visión de proveer soluciones de frío industrial de alta calidad a la región del Noreste Argentino.
               </p>
               <p className="font-body text-body-md text-on-surface-variant mb-4">
                 Desde entonces, hemos crecido hasta convertirnos en un referente regional en instalaciones frigoríficas, contenedores reefer y equipamiento comercial para la cadena de frío.
@@ -59,7 +59,7 @@ export default function NosotrosPage() {
             </div>
             <div className="bg-surface-variant border border-outline-variant h-[400px] overflow-hidden relative">
               <Image
-                alt="Historia MK Refrigeraciones"
+                alt="Historia Refrigeraciones MK"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzN-bQppD639mrCGoCsJ5eJDaajpkzxGFHe2VQOjmnzmiZLqMJmMo-SRt5Svn7KncJa0Nrf_YWt8mYYxQReddi5G50vM4PDkGfxNODe8nxI9QpOVg9vI2c8Lgwk9Lfe9fiDEOwGbeKbIEyoeB8Ua5E2zseidzsWyYRMbsj00SySM8xAvB0K8w4McRjMbeGc9Qdyc436uroDLHXdm_9MS6VArFpccolYEdBlAsYidvDNgPfjlEinuR6hagMMvO0XM801YzEDowUVh0"
                 fill
                 className="object-cover"

@@ -22,7 +22,7 @@ export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [posts, setPosts] = useState<BlogPost[]>([]);
   useEffect(() => {
-    document.title = "Blog Técnico — Frío Industrial y Mantenimiento | MK Refrigeraciones";
+    document.title = "Blog Técnico — Frío Industrial y Mantenimiento | Refrigeraciones MK";
   }, []);
 
   useEffect(() => {

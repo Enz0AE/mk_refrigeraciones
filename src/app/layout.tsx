@@ -25,7 +25,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MK Refrigeraciones - Expertos en Frío Industrial",
+  title: "Refrigeraciones MK - Expertos en Frío Industrial",
   description:
     "Diseño, montaje y mantenimiento de infraestructuras frigoríficas modulares en Garupá, Misiones. 20 años de trayectoria",
 };

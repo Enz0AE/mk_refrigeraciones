@@ -7,7 +7,7 @@ const posts = [
   "normativas-camaras-frigorificas-argentina",
 ];
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mkrefrigeraciones.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://refrigeracionesmk.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

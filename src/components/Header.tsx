@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
 export default function Header() {
@@ -51,9 +52,17 @@ export default function Header() {
       <div className="flex items-center justify-between max-w-[1280px] mx-auto px-margin-edge w-full h-full">
         <Link
           href="/"
-          className="font-heading text-headline-mobile md:text-headline-lg font-bold tracking-tighter text-on-primary"
+          className="flex items-center gap-3 font-heading text-headline-mobile md:text-headline-lg font-bold tracking-tighter text-on-primary"
         >
-          MK REFRIGERACIONES
+          <Image
+            src="/Logo transparente refrigeracionesmk.svg"
+            alt="Refrigeraciones MK"
+            width={40}
+            height={40}
+            className="shrink-0"
+            priority
+          />
+          REFRIGERACIONES MK
         </Link>
         <div className="hidden md:flex gap-gutter-md items-center h-full" role="list">
           <Link

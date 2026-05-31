@@ -4,11 +4,11 @@ import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const metadata: Metadata = {
-  title: "Equipos Frigoríficos — Contenedores Reefer y Exhibidores | MK Refrigeraciones",
+  title: "Equipos Frigoríficos — Contenedores Reefer y Exhibidores | Refrigeraciones MK",
   description:
     "Catálogo de equipos de frío industrial: contenedores reefer 3/6/12 m, exhibidores verticales, bateas carniceras y unidades evaporadoras.",
   openGraph: {
-    title: "Equipos Frigoríficos Industriales — MK Refrigeraciones",
+    title: "Equipos Frigoríficos Industriales — Refrigeraciones MK",
     description:
       "Soluciones modulares, contenedores reefer y sistemas de exhibición comercial para mantener la cadena de frío con precisión técnica.",
   },
@@ -80,7 +80,7 @@ export default async function EquiposPage() {
         />
         <div className="max-w-[1280px] mx-auto relative z-10 text-center">
           <span className="inline-block px-4 py-1 bg-surface-tint/10 text-primary-container font-mono text-label-sm uppercase tracking-widest mb-6 border border-outline-variant">
-            Catálogo Industrial 2024
+            Catálogo Industrial 2026
           </span>
           <h1 className="font-display text-display-lg md:text-[64px] md:leading-[72px] text-primary-container mb-6 max-w-4xl mx-auto">
             Soluciones Frigoríficas de Alta Capacidad

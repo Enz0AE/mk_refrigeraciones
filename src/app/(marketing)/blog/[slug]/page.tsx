@@ -26,7 +26,7 @@ export async function generateMetadata({
   if (!post) return { title: "Artículo no encontrado" };
 
   return {
-    title: `${post.title} — MK Refrigeraciones`,
+    title: `${post.title} — Refrigeraciones MK`,
     description: post.excerpt,
     openGraph: {
       title: post.title,

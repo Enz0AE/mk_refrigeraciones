@@ -15,7 +15,7 @@ function validate(form: { name: string; email: string; phone: string; message: s
 
 export default function ContactoPage() {
   useEffect(() => {
-    document.title = "Contacto — MK Refrigeraciones | Frío Industrial en Misiones";
+    document.title = "Contacto — Refrigeraciones MK | Frío Industrial en Misiones";
   }, []);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -182,7 +182,7 @@ export default function ContactoPage() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Ubicación de MK Refrigeraciones en Garupá, Misiones"
+          title="Ubicación de Refrigeraciones MK en Garupá, Misiones"
         />
       </section>
     </>

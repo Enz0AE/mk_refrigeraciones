@@ -30,7 +30,7 @@ export default function CMSLayout({
               href="/panel-cms"
               className="font-display text-lg font-bold tracking-tight"
             >
-              MK CMS
+              Refrigeraciones MK CMS
             </Link>
             <nav className="flex items-center gap-1">
               {NAV_ITEMS.map((item) => {

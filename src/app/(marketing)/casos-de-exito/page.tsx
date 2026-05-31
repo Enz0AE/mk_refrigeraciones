@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Casos de Éxito — Proyectos de Frío Industrial | MK Refrigeraciones",
+  title: "Casos de Éxito — Proyectos de Frío Industrial | Refrigeraciones MK",
   description:
     "Conozca nuestros proyectos realizados: Centro Logístico Frontera, Planta Procesadora Sur y Supermercados Mayoristas en Misiones.",
   openGraph: {
-    title: "Casos de Éxito — MK Refrigeraciones",
+    title: "Casos de Éxito — Refrigeraciones MK",
     description:
       "Proyectos de instalaciones frigoríficas, túneles de congelado y exhibición comercial ejecutados en la región del NEA.",
   },
