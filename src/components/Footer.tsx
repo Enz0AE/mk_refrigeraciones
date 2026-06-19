@@ -41,6 +41,19 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <div className="text-center mt-8 border-t border-outline-variant/30 pt-4">
+        <p className="font-mono text-label-sm text-on-primary opacity-60">
+          Desarrollado por{" "}
+          <a
+            href="https://walink.co/tay0wb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-secondary-fixed-dim transition-colors underline underline-offset-2"
+          >
+            Enzo_dev
+          </a>
+        </p>
+      </div>
     </footer>
   );
 }
